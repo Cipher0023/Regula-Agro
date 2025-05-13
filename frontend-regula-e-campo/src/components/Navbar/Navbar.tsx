@@ -1,5 +1,4 @@
 "use client"
-
 import React from "react";
 import Link from "next/link";
 import NavItem, { NavItemInterface } from "./Item/index";
@@ -42,8 +41,7 @@ export default function Navbar() {
   return (
     <header>
       <nav className="sm:h-[2em] bg-gradient-to-b  from-gray-700 to-gray-700 flex flex-row text-2xl justify-between items-center box-border">
-        <Link href="/">
-          <Logo/>            
+        <Link href="/">   
         </Link>
         <ul className="flex flex-row">
           {items.map((item, index) => (
