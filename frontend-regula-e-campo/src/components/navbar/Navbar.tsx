@@ -36,8 +36,8 @@ export default function Navbar() {
     },
     {
       url:"/biodiversidade",
-      label:"biodiversidade",
-      color: "text-blue-900"
+      label:"Biodiversidade",
+      color: "text-blue-400"
     },
     {
       url:"/pesquisa_e_inovacao",
@@ -63,7 +63,7 @@ export default function Navbar() {
         <Link href="/">
           <img 
             src="regulaEcampo.png"
-            alt="banner" 
+            alt="logosite" 
             className="h-20 object-cover"
             loading="lazy"
           />
