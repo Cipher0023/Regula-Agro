@@ -5,10 +5,10 @@ import PostMedioH from '../postagens/postMedioH/PostMedioH'
 function Destaques() {
   return (
     <div className="
-    flex flex-col
-    w-full bg-gray-500">
+    flex flex-row
+    w-full bg-gray-800">
       <PostGrande/>
-      <div>
+      <div className='bg-blue-500'>
         <PostMedioH/>
         <PostMedioH/>  
       </div>

@@ -2,7 +2,7 @@ import React from 'react'
 
 function PostGrande() {
   return (
-    <div className="relative flex w-5/10 aspect-[2/1] bg-gray-500 rounded-2xl overflow-hidden">
+    <div className="relative bg-yellow-500 rounded-2xl overflow-hidden">
       <img 
         src="trator.png"
         alt="imagem do post" 
