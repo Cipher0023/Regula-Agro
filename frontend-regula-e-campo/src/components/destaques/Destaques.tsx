@@ -4,13 +4,17 @@ import PostMedioH from '../postagens/postMedioH/PostMedioH'
 
 function Destaques() {
   return (
-    <div className="
-    flex flex-row
-    w-full bg-gray-800">
-      <PostGrande/>
-      <div className='bg-blue-500'>
-        <PostMedioH/>
-        <PostMedioH/>  
+    <div className="max-w-[1224px] flex flex-row
+      bg-red-200 space-x-6">
+      {/* PostGrande ocupa metade do espaço */}
+      <div className="flex-1">
+        <PostGrande />
+      </div>
+
+      {/* Coluna com dois PostMedioH também ocupa metade */}
+      <div className="flex-1 space-y-6 flex flex-col">
+        <PostMedioH />
+        <PostMedioH />  
       </div>
     </div>
   )

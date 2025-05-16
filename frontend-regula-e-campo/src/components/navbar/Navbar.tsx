@@ -50,32 +50,34 @@ export default function Navbar() {
   const pathName = usePathname();
 
   return (
-    <header>
+    <header style={{ boxShadow: "0 2px 4px 0 rgba(0,0,0,0.07)"}}>
       {/*Aba verde superior, com o logo e a barra de pesquisa */}
-      <div className="bg-green-800 w-full flex justify-between items-center">
+      <div className="bg-[#1B5E20] w-full h-18 flex justify-between items-center">
+        <div className="max-w-[1224px] w-full mx-auto flex justify-between items-center">
         
-        {/* logo do site */}
-        {/*está sublinhado azul pois ainda estamos usando um arquivo local
-        para que fique correto nós devemos trocar por um objeto Image do next.js
-        esse objeto necessita de um link para que a imagem carregue, isso só é 
-        possível quando temos um backend pronto e com um banco de dados de imagens
-        rodando, no futuro mecheremos nisso*/}
-        <Link href="/">
-          <img 
-            src="regulaEcampo.png"
-            alt="logosite" 
-            className="h-20 object-cover"
-            loading="lazy"
-          />
-        </Link>
-        {/*Barra de pesquisa*/}
-        <SearchBar/>
-        {/*área onde o user loga no seu perfil*/}
-        <LoginButton/>
+          {/* logo do site */}
+          {/*está sublinhado azul pois ainda estamos usando um arquivo local
+          para que fique correto nós devemos trocar por um objeto Image do next.js
+          esse objeto necessita de um link para que a imagem carregue, isso só é 
+          possível quando temos um backend pronto e com um banco de dados de imagens
+          rodando, no futuro mecheremos nisso*/}
+          <Link href="/">
+            <img 
+              src="regulaEcampo.png"
+              alt="logosite" 
+              className="h-14 object-cover"
+              loading="lazy"
+            />
+          </Link>
+          {/*Barra de pesquisa*/}
+          <SearchBar/>
+          {/*área onde o user loga no seu perfil*/}
+          <LoginButton/>
+        </div>
       </div>
       {/*barra de navegação*/}
-      <nav className="bg-gradient-to-b from-white from-90% to-gray-300 flex flex-col justify-between items-center">
-        <ul className="flex flex-row">
+      <nav className="bg-white h-12">
+        <ul className="max-w-[1224px] w-full mx-auto flex justify-between flex-row">
           {items.map((item, index) => (
             <NavItem
               key={index}
