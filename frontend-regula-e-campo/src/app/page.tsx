@@ -4,11 +4,12 @@ import PropagandaWide from "@/components/propaganda/propagandaWide/PropagandaWid
 
 export default function Home() {
   return (
-    <div className="mx-auto max-w-[1224px] flex flex-col items-center justify-center">
-
-      <PropagandaWide/>
-
-      <main className="flex flex-col w-9/10">
+    <div className="flex flex-col items-center p-10">
+      <div className="max-w-[1224px]">
+        <PropagandaWide/>
+      </div>
+      
+      <main className="flex flex-col max-w-[1224px] gap-8">
 
         <Destaques/>
 
