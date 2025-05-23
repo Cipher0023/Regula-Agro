@@ -2,7 +2,6 @@ import Destaques from "@/components/Seçoes/Destaques";
 import Novidades from "@/components/Seçoes/Novidades";
 import Secundário from "@/components/Seçoes/Secundário";
 import Footer from "@/components/footer/footer";
-import Texto from "@/components/notícia/Texto";
 import PropagandaWide from "@/components/propaganda/propagandaWide/PropagandaWide";
 
 
@@ -22,7 +21,6 @@ export default function Home() {
         <div className="stroke-gray-100 border-b border-t border-gray-100 w-full">
         </div>
         <Novidades/>
-        <Texto/>
 
       </main>
     <Footer/>

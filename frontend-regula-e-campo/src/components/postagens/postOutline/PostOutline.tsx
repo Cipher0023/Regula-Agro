@@ -3,9 +3,9 @@ import Badge from '@/components/Badge/Badge'
 import Commentbutton from '@/components/buttons/smButton/Commentbutton'
 import Viewbutton from '@/components/buttons/smButton/Viewbutton'
 
-function PostGrande() {
+function PostOutline() {
   return (
-    <div className="rounded-2x1 overflow-hidden h-full flex flex-col space-y-3">
+    <div className="rounded-2x1 h-full flex flex-col space-y-3  border border-gray-300 p-3 rounded-2xl">
 
       <div className="flex flex-row space-x-2">
         <Badge 
@@ -17,17 +17,11 @@ function PostGrande() {
       </div>
 
       <div className='relative rounded-2xl overflow-hidden h-full'>
-        <img 
-          src="trator.png"
-          alt="imagem do post" 
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
+        
 
-        <div className="absolute bottom-0 w-full text-left
-        text-white bg-gradient-to-t from-black/ to-transparent
-        p-4 font-bold text-[24px]">
-          Tour app desenvolvido pela Basf teste em Sto. Antonio de Posse
+        <div className="w-full text-left
+        text-gray-900 font-bold text-[24px]">
+          Tour app desenvolvido pela Basf tem teste em Sto. Antonio de Posse
         </div>
       </div>
 
@@ -39,4 +33,4 @@ function PostGrande() {
   )
 }
 
-export default PostGrande
+export default PostOutline

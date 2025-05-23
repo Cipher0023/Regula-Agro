@@ -1,7 +1,7 @@
 import React from "react"
 import { Eye } from 'lucide-react'
 
-interface SmbuttonProps {
+interface ViewbuttonProps {
     text: string;
     bgColor?: string;
     textColor?: string;
@@ -10,14 +10,14 @@ interface SmbuttonProps {
     rounded?: string;
 }
 
-export default function Smbutton({
+export default function Viewbutton({
     text,
-    bgColor = "bg-neutral-200",
-    textColor = "text-neutral-700",
+    bgColor = "bg-zinc-200",
+    textColor = "text-neutral-800",
     textSize = "text-sm",
     padding = "px-3",
     rounded = "rounded-full"
-}: SmbuttonProps) {
+}: ViewbuttonProps) {
     return (
     <div className={`w-fit h-8 flex items-center justify-center gap-2 ${bgColor} ${textColor} ${textSize} ${padding} ${rounded} font-semibold`}>
         <Eye size={20} />
