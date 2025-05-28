@@ -12,7 +12,7 @@ interface CommentbuttonProps {
 
 export default function Commentbutton({
     text,
-    bgColor = "bg-zinc-200",
+    bgColor = "bg-gray-100",
     textColor = "text-neutral-800",
     textSize = "text-sm",
     padding = "px-3",

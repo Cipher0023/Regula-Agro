@@ -53,7 +53,7 @@ export default function Navbar() {
     <header style={{ boxShadow: "0 2px 4px 0 rgba(0,0,0,0.07)"}}>
       {/*Aba verde superior, com o logo e a barra de pesquisa */}
       <div className="bg-[#1B5E20] w-full h-18 flex justify-between items-center px-10">
-        <div className="max-w-[1224px] w-full mx-auto flex justify-between items-center">
+        <div className="max-w-[1136px] w-full mx-auto flex justify-between items-center">
         
           {/* logo do site */}
           {/*está sublinhado azul pois ainda estamos usando um arquivo local
@@ -77,7 +77,7 @@ export default function Navbar() {
       </div>
       {/*barra de navegação*/}
       <nav className="bg-white h-12 px-10">
-        <ul className="max-w-[1224px] w-full mx-auto flex justify-between flex-row">
+        <ul className="max-w-[1136px] w-full mx-auto flex justify-between flex-row">
           {items.map((item, index) => (
             <NavItem
               key={index}
