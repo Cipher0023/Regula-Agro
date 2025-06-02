@@ -4,11 +4,127 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+model Developer {
+  dev_id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String 
+  email String @unique
+  password String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  pages Page[]
+  document_types Document_type[]
+  tags Tag_types[]
+  roles Role[]
+}
+
+model Reader{
+  reader_id String @id @default (auto()) @map("_id") @db.ObjectId
+  name String
+  email String @unique
+  password String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  likes Likes[]
+  comments Comments[]
+  breadcrumbs Reader_breadecrumbs[]
+}
+
+model Likes{
+  like_id String @id @default (auto()) @map("_id") @db.ObjectId
+  reader_id String @db.ObjectId
+  reader Reader @relation(fields: [reader_id], references: [reader_id])
+  news_id String @db.ObjectId
+  news News @relation(fields: [news_id], references: [news_id])
+  created_at DateTime @default(now())
+}
+
+model Comments{
+  comment_id String @id @default (auto()) @map("_id") @db.ObjectId
+  reader_id String @db.ObjectId
+  reader Reader @relation(fields: [reader_id], references: [reader_id])
+  news_id String @db.ObjectId
+  news News @relation(fields: [news_id], references: [news_id])
+  title String
+  text String
+  created_at DateTime @default(now())
+}
+
+model Reader_breadecrumbs{
+  breadcrumb_id String @id @default (auto()) @map("_id") @db.ObjectId
+  reader_id String @db.ObjectId
+  reader Reader @relation(fields: [reader_id], references: [reader_id])
+  created_at DateTime @default(now())
+}
+
+model Page{
+  page_id String @id @default (auto()) @map("_id") @db.ObjectId
+  dev_id String @db.ObjectId
+  developer Developer @relation(fields: [dev_id], references: [dev_id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Document_type{
+  document_type_id String @id @default (auto()) @map("_id") @db.ObjectId
+  name String
+  dev_id String @db.ObjectId
+  developer Developer @relation(fields: [dev_id], references: [dev_id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  creators Creator[]
+}
+
+model Tag_types{
+  tag_id String @id @default (auto()) @map("_id") @db.ObjectId
+  name String
+  dev_id String @db.ObjectId
+  developer Developer @relation(fields: [dev_id], references: [dev_id])
+  created_at DateTime @default(now())
+  news News[]
+}
+
+model Role{
+  role_id String @id @default (auto()) @map("_id") @db.ObjectId
+  dev_id String @db.ObjectId
+  developer Developer @relation(fields: [dev_id], references: [dev_id])
+  name String
+  permissions String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  Creators Creator[]
+}
+
+model Creator{
+  creator_id String @id @default (auto()) @map("_id") @db.ObjectId
+  name String
+  email String @unique
+  password String
+  document_type_id String @db.ObjectId
+  document_type Document_type @relation(fields: [document_type_id], references: [document_type_id])
+  document_number String
+  role_id String @db.ObjectId
+  role Role @relation(fields: [role_id], references: [role_id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model News{
+  news_id String @id @default (auto()) @map("_id") @db.ObjectId
+  title String
+  text String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  tag String @db.ObjectId
+  tag_types Tag_types @relation(fields: [tag], references: [tag_id])
+  likes Likes[]
+  comments Comments[]
 }
