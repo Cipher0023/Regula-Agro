@@ -115,16 +115,43 @@ model Creator{
   role Role @relation(fields: [role_id], references: [role_id])
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  photos Photos[]
+  created_news News[]
+  naratives Narative[]
 }
 
 model News{
   news_id String @id @default (auto()) @map("_id") @db.ObjectId
   title String
   text String
+  creator_id String @db.ObjectId
+  creator Creator @relation(fields: [creator_id], references: [creator_id])
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   tag String @db.ObjectId
   tag_types Tag_types @relation(fields: [tag], references: [tag_id])
   likes Likes[]
   comments Comments[]
+  photos Photos[]
+}
+
+model Photos{
+  photo_id String @id @default (auto()) @map("_id") @db.ObjectId
+  source String
+  description String
+  creator_id String @db.ObjectId
+  creator Creator @relation(fields: [creator_id], references: [creator_id])
+  news_id String @db.ObjectId
+  news News @relation(fields: [news_id], references: [news_id])
+  created_at DateTime @default(now())
+}
+
+model Narative{
+  narrative_id String @id @default (auto()) @map("_id") @db.ObjectId
+  name String
+  description String
+  creator_id String @db.ObjectId
+  creator Creator @relation(fields: [creator_id], references: [creator_id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
