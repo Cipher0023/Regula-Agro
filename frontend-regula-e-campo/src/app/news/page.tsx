@@ -16,7 +16,7 @@ export default function News() {
           <div className="flex w-full">
             < Texto />
           </div>
-          <div className="flex w-full max-w-[480px] h-auto pb-10">
+          <div className="w-full max-w-[480px] h-auto pb-10 hidden md:flex">
             <ChatBox />
           </div>
         </div>
