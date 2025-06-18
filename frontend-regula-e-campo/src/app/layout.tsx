@@ -1,31 +1,36 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from "react";
 import Navbar from "@/components/navbar/Navbar";
 import "../app/globals.css";
 import MobileNavbar from "@/components/navbar/MobileNavbar";
+import {
+  useViewportContext,
+  ViewportProvider,
+} from "@/contexts/ViewportContext";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const [isMobile, setIsMobile] = useState(false);
+function LayoutContent({ children }: { children: React.ReactNode }) {
+  const { isMobile } = useViewportContext();
+  return (
+    <>
+      <div className="sticky top-0 z-100">
+        {isMobile ? <MobileNavbar /> : <Navbar />}
+      </div>
+      {children}
+    </>
+  );
+}
 
-  useEffect(() => {
-    function handleResize() {
-      setIsMobile(window.innerWidth < 768);
-    }
-
-    handleResize(); // detecta na montagem
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="pt-BR">
       <body>
-        <div className="sticky top-0 z-100">
-          {isMobile ? <MobileNavbar /> : <Navbar />}
-        </div>
-        {children}
+        <ViewportProvider>
+          <LayoutContent>{children}</LayoutContent>
+        </ViewportProvider>
       </body>
     </html>
   );
