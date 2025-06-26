@@ -45,3 +45,5 @@ Photos = Pht
 Post = Pst
 Campaign = Cpg
 Creator = Cre
+News = Nws
+Tag Types = tgt

@@ -27,6 +27,20 @@ import { lstCreCnt } from "../../controllers/creator/lstCreCnt.js";
 import { updCreCnt } from "../../controllers/creator/updCreCnt.js";
 import { delCreCnt } from "../../controllers/creator/delCreCnt.js";
 
+//imports news
+import { regNwsCnt } from "../../controllers/news/regNwsCnt.js";
+import { fndNwsCnt } from "../../controllers/news/fndNwsCnt.js";
+import { lstNwsCnt } from "../../controllers/news/lstNwsCnt.js";
+import { updNwsCnt } from "../../controllers/news/updNwsCnt.js";
+import { delNwsCnt } from "../../controllers/news/delNwsCnt.js";
+
+//imports tag_types
+import { regTgtCnt } from "../../controllers/tag_types/regTgtCnt.js";
+import { fndTgtCnt } from "../../controllers/tag_types/fndTgtCnt.js";
+import { lstTgtCnt } from "../../controllers/tag_types/lstTgtCnt.js";
+import { updTgtCnt } from "../../controllers/tag_types/updTgtCnt.js";
+import { delTgtCnt } from "../../controllers/tag_types/delTgtCnt.js";
+
 const router = express.Router();
 
 //developer actions
@@ -55,5 +69,19 @@ router.get("/fndCre", fndCreCnt);
 router.get("/lstCre", lstCreCnt);
 router.put("/updCre", updCreCnt);
 router.delete("/delCre", delCreCnt);
+
+//news actions
+router.post("/regNws", regNwsCnt);
+router.get("/fndNws", fndNwsCnt);
+router.get("/lstNws", lstNwsCnt);
+router.put("/updNws", updNwsCnt);
+router.delete("/delNws", delNwsCnt);
+
+//tag_types actions
+router.post("/regTgt", regTgtCnt);
+router.get("/fndTgt", fndTgtCnt);
+router.get("/lstTgt", lstTgtCnt);
+router.put("/updTgt", updTgtCnt);
+router.delete("/delTgt", delTgtCnt);
 
 export default router;
