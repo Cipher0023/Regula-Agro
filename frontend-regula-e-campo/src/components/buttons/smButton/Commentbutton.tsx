@@ -1,27 +1,31 @@
-import React from "react"
-import { MessageCircle } from 'lucide-react'
+import React from "react";
+import { MessageCircle } from "lucide-react";
 
 interface CommentbuttonProps {
-    text: string;
-    bgColor?: string;
-    textColor?: string;
-    textSize?: string;
-    padding?: string;
-    rounded?: string;
+  count?: number;
+  variant?: "default" | "compact"; // opcional — pode forçar manualmente
 }
 
 export default function Commentbutton({
-    text,
-    bgColor = "bg-gray-100",
-    textColor = "text-neutral-800",
-    textSize = "text-sm",
-    padding = "px-3",
-    rounded = "rounded-full"
+  count = 0,
+  variant,
 }: CommentbuttonProps) {
+  // Usar só a prop variant, default para "default"
+  const resolvedVariant = variant ?? "default";
+
+  if (resolvedVariant === "compact") {
     return (
-    <div className={`w-fit h-8 flex items-center justify-center gap-2 ${bgColor} ${textColor} ${textSize} ${padding} ${rounded} font-semibold`}>
-        <MessageCircle size={20} />
-        <span>{text}</span>
-    </div>
+      <div className="flex flex-col items-center justify-center text-neutral-800">
+        <MessageCircle size={20} className="mb-1" />
+        <span className="text-[12px] font-medium">Comentários ({count})</span>
+      </div>
     );
+  }
+
+  return (
+    <div className="w-fit h-8 flex items-center justify-center gap-1 bg-gray-100 text-neutral-800 text-xs px-3 rounded-full font-semibold">
+      <MessageCircle size={16} />
+      <span>{count}</span>
+    </div>
+  );
 }

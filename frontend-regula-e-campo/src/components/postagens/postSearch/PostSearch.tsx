@@ -1,5 +1,5 @@
 import React from 'react'
-import Badge from '@/components/Badge/Badge'
+import Badge from '@/components/badge/Badge'
 import Commentbutton from '@/components/buttons/smButton/Commentbutton'
 import Viewbutton from '@/components/buttons/smButton/Viewbutton'
 

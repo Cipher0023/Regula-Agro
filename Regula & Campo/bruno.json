@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Regula & Campo",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

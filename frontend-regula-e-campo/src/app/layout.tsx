@@ -12,7 +12,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   const { isMobile } = useViewportContext();
   return (
     <>
-      <div className="sticky top-0 z-100">
+      <div className="sticky top-0 z-[100] w-full">
         {isMobile ? <MobileNavbar /> : <Navbar />}
       </div>
       {children}
@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body>
+      <body className="overflow-x-hidden">
         <ViewportProvider>
           <LayoutContent>{children}</LayoutContent>
         </ViewportProvider>
