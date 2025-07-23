@@ -14,15 +14,13 @@ export default function Home() {
     // 📱 MOBILE STRUCTURE
     return (
       <>
-        <div className="px-4 pt-4">
+        <div className="pt-10 pb-10 flex justify-center items-center">
           <PropagandaWide />
         </div>
 
-        <main className="flex flex-col gap-8 px-4 pt-4 pb-20">
+        <main className="flex flex-col gap-8 pt-4 pb-20">
           <DestaquesMobile />
-        </main>
-
-        <Footer />        
+        </main>   
       </>
     );
   }
@@ -30,17 +28,17 @@ export default function Home() {
   // 💻 DESKTOP STRUCTURE
   return (
     <>
-      <div className="max-w-[1136px] mx-auto bg ">
+      <div className="w-full flex justify-center items-center p-10 ">
         <PropagandaWide />
       </div>
 
-      <main className="flex flex-col max-w-[1136px] mx-auto gap-8 pb-40 px-10 lg:px-0">
+      <main className="flex flex-col w-full gap-8 pb-40 lg:px-0 ">
         <Destaques />
         <div className="stroke-gray-100 border-b border-t border-gray-100 w-full"></div>
         <Novidades />
       </main>
 
-      <Footer />
+      
     </>
   );
 }

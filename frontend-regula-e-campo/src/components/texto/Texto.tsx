@@ -30,7 +30,7 @@ function Texto({ title, subtitle, imageUrl, content, views, badgeType, published
   })
 
   return (
-    <div className="flex flex-col pl-10">
+    <div className="flex flex-col ">
       {/* Topo: badge */}
       <div className="flex flex-row items-center justify-between mb-2">
         <div className="space-x-2">

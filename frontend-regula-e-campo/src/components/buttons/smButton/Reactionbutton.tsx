@@ -27,30 +27,31 @@ export default function ReactionButton({
   },
   variant,
 }: ReactionButtonProps) {
-  // Sempre usar o variant passado ou default "default"
   const resolvedVariant = variant ?? "default";
-
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<ReactionType | null>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
-
-  const sortedReactions = Object.entries(counts)
-    .sort(([, a], [, b]) => b - a)
-    .slice(0, 3);
 
   const total = Object.values(counts).reduce((sum, c) => sum + c, 0);
 
   const toggleMenu = () => setOpen((prev) => !prev);
 
   const handleSelect = (reaction: ReactionType) => {
-    setSelected(reaction);
+    if (selected === reaction) {
+      setSelected(null); // Deseleciona
+    } else {
+      setSelected(reaction); // Seleciona novo
+    }
     setOpen(false);
     console.log("Usuário reagiu com:", reaction);
   };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
         setOpen(false);
       }
     };
@@ -60,41 +61,64 @@ export default function ReactionButton({
     };
   }, []);
 
+  // Ordena reações por mais usadas
+  const reactionsSorted = Object.entries(counts)
+    .sort(([, a], [, b]) => b - a)
+    .map(([type]) => type as ReactionType);
+
+  // Garante que a reação selecionada venha em primeiro (sem duplicar)
+  const sortedReactions: ReactionType[] = selected
+    ? [selected, ...reactionsSorted.filter((r) => r !== selected)].slice(0, 3)
+    : reactionsSorted.slice(0, 3);
+
   return (
     <div className="relative" ref={wrapperRef}>
       {resolvedVariant === "compact" ? (
         <button
           onClick={toggleMenu}
-          className="flex flex-col items-center text-xs text-neutral-800"
+          className={`
+            flex flex-col items-center gap-1
+            ${selected ? "text-blue-600" : "text-neutral-800"}
+          `}
         >
-          <img
-            src={
-              selected
-                ? SVG_PATHS[selected]
-                : "/emojis/like.svg"
-            }
-            alt="reagir"
-            className="w-5 h-5 mb-1"
-          />
-          Reações ({total})
+          <div className="flex -space-x-1.5">
+            {sortedReactions.map((type, i) => (
+              <span
+                key={type}
+                className={`
+                  w-5 h-5 rounded-full flex items-center justify-center overflow-hidden
+                  border-2 ${selected === type ? "border-blue-500" : "border-white"}
+                  bg-white
+                `}
+                style={{ zIndex: 3 - i }}
+              >
+                <img src={SVG_PATHS[type]} alt={type} className="w-4 h-4" />
+              </span>
+            ))}
+          </div>
+          <span className="text-xs font-medium text-center">Reações ({total})</span>
         </button>
       ) : (
         <button
           onClick={toggleMenu}
-          className="cursor-pointer inline-flex items-center gap-2 px-3 h-8 bg-gray-100 rounded-full hover:bg-gray-200"
+          className={`
+            cursor-pointer inline-flex items-center gap-2 px-3 h-8
+            rounded-full hover:bg-gray-200
+            ${selected ? "bg-blue-100" : "bg-gray-100"}
+          `}
         >
           <div className="flex -space-x-1.5">
-            {sortedReactions.map(([type], i) => (
+            {sortedReactions.map((type, i) => (
               <span
                 key={type}
-                className="w-5 h-5 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden"
+                className={`
+                  w-5 h-5 rounded-full flex items-center justify-center overflow-hidden
+                  border-2 ${selected === type ? "border-blue-500" : "border-white"}
+                  bg-white
+                `}
                 style={{ zIndex: 3 - i }}
               >
-                <img
-                  src={SVG_PATHS[type as ReactionType]}
-                  alt={type}
-                  className="w-4 h-4"
-                />
+                <img src={SVG_PATHS[type]} alt={type} className="w-4 h-4" />
               </span>
             ))}
           </div>
@@ -104,18 +128,17 @@ export default function ReactionButton({
 
       {/* Menu de reações */}
       {open && (
-        <div className="absolute bottom-full left-0 mb-6 flex gap-1 border border-gray-200 bg-white shadow-lg rounded-2xl overflow-hidden px-2 py-1 z-10">
+        <div className="absolute bottom-full left-0 mb-2 flex gap-1 border border-gray-200 bg-white shadow-lg rounded-2xl overflow-hidden px-2 py-1 z-10">
           {(Object.keys(SVG_PATHS) as ReactionType[]).map((type) => (
             <button
               key={type}
               onClick={() => handleSelect(type)}
-              className="w-10 h-10 p-1 rounded-full hover:scale-110 transition-transform"
+              className={`
+                w-10 h-10 p-1 rounded-full hover:scale-110 transition-transform
+                ${selected === type ? "ring ring-blue-500" : ""}
+              `}
             >
-              <img
-                src={SVG_PATHS[type]}
-                alt={type}
-                className="w-full h-full"
-              />
+              <img src={SVG_PATHS[type]} alt={type} className="w-full h-full" />
             </button>
           ))}
         </div>

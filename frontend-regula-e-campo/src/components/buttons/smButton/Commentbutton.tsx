@@ -17,7 +17,7 @@ export default function Commentbutton({
     return (
       <div className="flex flex-col items-center justify-center text-neutral-800">
         <MessageCircle size={20} className="mb-1" />
-        <span className="text-[12px] font-medium">Comentários ({count})</span>
+        <span className="text-xs font-medium">Comentários ({count})</span>
       </div>
     );
   }

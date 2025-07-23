@@ -11,10 +11,10 @@ export interface NavItemInterface {
 export default function NavItem(props: NavItemInterface) {
   return (
     <li
-className={`
-        m-3 text-base font-bold transition-colors duration-200 border-b-2
+      className={`
+        flex h-12 text-base font-bold transition-colors duration-200 border-b-4 pl-4 pr-4 items-center pt-1
         ${props.color}
-        ${props.isActive ? `border-green-600 ${props.color}` : `text-black border-transparent hover:${props.color}`}
+        ${props.isActive ? '' : 'border-transparent hover:border-current'}
       `}
     >
       <Link href={props.url}>

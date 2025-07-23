@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Footer from '@/components/footer/footer'
 import TextoResponsive from '@/components/texto/TextoResponsivo'
 import PropagandaWide from '@/components/propaganda/propagandaWide/PropagandaWide'
 import ChatBox from '@/components/chat/ChatBox'
@@ -48,9 +47,9 @@ Esse debate promete ser intenso no Congresso Nacional, já que envolve questões
   return (
     <>
       {/* Container com padding lateral */}
-      <div className="flex flex-col gap-y-12 w-full items-center pb-40">
+      <div className="flex flex-col pt-10 w-full items-center">
         {/* Propaganda topo */}
-        <div className="max-w-[1136px]">
+        <div className="pb-10 flex justify-center items-center">
           <PropagandaWide />
         </div>
 
@@ -67,7 +66,7 @@ Esse debate promete ser intenso no Congresso Nacional, já que envolve questões
             />
 
             {/* Chat lateral (desktop apenas) */}
-            <div className="max-w-[480px] flex-shrink-0 hidden md:flex">
+            <div className="w-full max-w-[420px] flex-shrink-0 hidden md:flex">
               <ChatBox />
             </div>
           </div>
@@ -80,7 +79,7 @@ Esse debate promete ser intenso no Congresso Nacional, já que envolve questões
       {/* Sheet de comentários no mobile */}
       {showComments && <MobileChatSheet onClose={() => setShowComments(false)} />}
 
-      <Footer />
+      
     </>
   )
 }

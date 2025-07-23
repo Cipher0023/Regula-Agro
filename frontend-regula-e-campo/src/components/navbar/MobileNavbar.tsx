@@ -4,12 +4,14 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { Menu, X, ChevronRight, Search } from 'lucide-react'
 import LoginButton from '../buttons/loginButton/LoginButton'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import type { NavItemInterface } from './item/index'
 
 export default function MobileNavbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
   const pathName = usePathname()
+  const router = useRouter()
 
   const items: NavItemInterface[] = [
     { url: '/culturas', label: 'Culturas', color: 'text-green-700' },
@@ -19,6 +21,14 @@ export default function MobileNavbar() {
     { url: '/biodiversidade', label: 'Biodiversidade', color: 'text-blue-400' },
     { url: '/pesquisa_e_inovacao', label: 'Pesquisa e Inovação', color: 'text-red-900' },
   ]
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (searchTerm.trim()) {
+      setIsOpen(false)
+      router.push(`/busca?termo=${encodeURIComponent(searchTerm.trim())}`)
+    }
+  }
 
   return (
     <header className="shadow-md md:hidden">
@@ -57,15 +67,22 @@ export default function MobileNavbar() {
           </button>
         </div>
 
-        {/* Campo de busca com ícone */}
-        <div className="px-4 mt-2 relative items-center">
-          <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4" />
+        {/* Campo de busca com ícone clicável */}
+        <form
+          onSubmit={handleSearchSubmit}
+          className="px-4 mt-2 mb-6 relative flex items-center"
+        >
           <input
             type="text"
             placeholder="Buscar"
-            className="w-full px-10 py-2 mb-6 rounded-lg bg-gray-100 focus:outline-none"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-4 pr-10 py-2 rounded-lg bg-gray-100 focus:outline-none"
           />
-        </div>
+          <button type="submit" className="absolute right-6 text-gray-500 hover:text-black">
+            <Search className="h-4 w-4" />
+          </button>
+        </form>
 
         {/* Navegação */}
         <nav className="px-4 space-y-8">
@@ -99,7 +116,7 @@ export default function MobileNavbar() {
       {/* Fundo escurecido com blur atrás do drawer */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/33 backdrop-blur-sm z-40"
+          className="fixed inset-0 bg-black/33 z-40"
           onClick={() => setIsOpen(false)}
         />
       )}

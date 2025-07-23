@@ -18,12 +18,14 @@ export default function MobileChatSheet({ onClose }: MobileChatSheetProps) {
   }, [messages]);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 z-50 flex justify-center items-end">
-      <div className="w-full max-h-[90%] bg-white rounded-t-2xl flex flex-col overflow-hidden shadow-lg">
-        
+    <div className="fixed inset-0 bg-black/30 z-50 flex justify-center items-end">
+      <div
+        className="w-full bg-white rounded-t-2xl flex flex-col shadow-lg overflow-hidden"
+        style={{ height: '460px' }} // 👈 altura fixa da bottom sheet
+      >
         {/* Barra superior */}
-        <div className="flex items-center justify-between px-4 py-3 border-b">
-          <h2 className="text-lg font-semibold">
+        <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200">
+          <h2 className="text-base font-semibold text-neutral-800">
             Comentários <span className="text-gray-500">({messages.length})</span>
           </h2>
           <button onClick={onClose}>
@@ -31,7 +33,7 @@ export default function MobileChatSheet({ onClose }: MobileChatSheetProps) {
           </button>
         </div>
 
-        {/* Lista de mensagens */}
+        {/* Lista de mensagens com rolagem */}
         <div className="flex-1 overflow-y-auto px-4 pt-2 space-y-4">
           {messages.length === 0 ? (
             <p className="text-gray-500">Seja o primeiro a comentar!</p>
@@ -45,8 +47,8 @@ export default function MobileChatSheet({ onClose }: MobileChatSheetProps) {
           )}
         </div>
 
-        {/* Campo de texto */}
-        <div className="border-t px-4 py-3 bg-white flex gap-2">
+        {/* Campo de texto fixo na parte inferior */}
+        <div className="border-t border-gray-200 px-4 py-3 bg-white flex gap-2">
           <input
             type="text"
             value={input}

@@ -15,7 +15,7 @@ interface NoticiaNovidadeProps {
 
 function NotíciaNovidade({ imageUrl, title, views, comments, badgeType, daysAgo }: NoticiaNovidadeProps) {
   return (
-    <div className="flex flex-col overflow-hidden space-y-3">
+    <div className="flex flex-col overflow-hidden space-y-3 w-full">
       {/* Imagem com badge */}
       <div className="relative border border-gray-200 rounded-2xl overflow-hidden">
         <div className="absolute top-2 left-2 z-10">

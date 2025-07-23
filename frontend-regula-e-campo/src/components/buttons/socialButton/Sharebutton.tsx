@@ -41,7 +41,7 @@ export default function Sharebutton() {
       <button
         ref={buttonRef}
         type="button"
-        className="cursor-pointer w-fit h-8 flex items-center justify-center gap-1 bg-gray-100 text-neutral-800 hover:bg-gray-200 text-xs px-3 rounded-full font-semibold"
+        className="cursor-pointer w-fit h-8 flex items-center justify-center gap-1.5 bg-gray-100 text-neutral-800 hover:bg-gray-200 text-sm px-3 rounded-full font-medium "
         onClick={() => setOpen(prev => !prev)}
       >
         <Share2 size={16} />

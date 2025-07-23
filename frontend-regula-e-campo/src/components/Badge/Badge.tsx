@@ -49,9 +49,10 @@ export default function Badge({ type }: BadgeProps) {
   const style = STYLES[type];
 
   return (
-    <div className={`w-fit h-8 inline-flex items-center justify-center px-3 rounded-full font-semibold text-xs ${style.bg} ${style.textColor}`}>
-      {style.text}
-    </div>
+    <div className={`w-fit h-8 inline-flex items-center justify-center px-3 rounded-full font-medium text-sm leading-none ${style.bg} ${style.textColor}`}>
+  {style.text}
+</div>
+
   );
 }
 

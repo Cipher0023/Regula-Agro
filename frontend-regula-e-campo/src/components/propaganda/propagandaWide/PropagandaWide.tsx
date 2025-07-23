@@ -4,14 +4,13 @@ type Props = object
 
 function PropagandaWide({}: Props) {
   return (
-    <div className='w-8/10 aspect-[6/1] bg-red-500 m-10'>
-      <img 
-        src="propaganda.jpg"
-        alt="imagem do post" 
-        className="w-full h-full object-cover"
-        loading="lazy"
-      />
-    </div>
+    <div
+      className='
+        w-[300px] h-[100px] 
+        sm:w-[728px] sm:h-[90px]
+        bg-gray-200 rounded-xs overflow-hidden relative
+      '
+    ></div>
   )
 }
 

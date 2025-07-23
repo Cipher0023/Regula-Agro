@@ -8,7 +8,7 @@ function Novidades() {
       <h2 className="text-2xl font-bold mb-4  text-neutral-700 ">Novidades</h2>
 
       <div className="flex flex-row w-full space-x-4">
-        <div className="flex-1">
+        <div className="flex-1 flex">
           <NotíciaNovidade
             imageUrl="trator.png"
             title="Tour app desenvolvido pela Basf tem teste em Sto. Antonio de Posse"
@@ -18,7 +18,7 @@ function Novidades() {
           />
         </div>
 
-        <div className="flex-1">
+        <div className="flex-1 flex">
           <NotíciaNovidade
             imageUrl="trator.png"
             title="Tour app desenvolvido pela Basf tem teste em Sto. Antonio de Posse"

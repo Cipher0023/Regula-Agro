@@ -30,7 +30,7 @@ function TextoMobile({ title, subtitle, imageUrl, content, views, badgeType, pub
   })
 
   return (
-    <div className="flex flex-col px-4">
+    <div className="flex flex-col">
       {/* Topo: badge */}
       <div className="flex flex-row items-center justify-between mb-2">
         <div className="space-x-2">
