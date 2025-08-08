@@ -41,6 +41,21 @@ import { lstTgtCnt } from "../../controllers/tag_types/lstTgtCnt.js";
 import { updTgtCnt } from "../../controllers/tag_types/updTgtCnt.js";
 import { delTgtCnt } from "../../controllers/tag_types/delTgtCnt.js";
 
+//imports photos
+import { regPhtCnt } from "../../controllers/photos/regPhtCnt.js";
+import { fndPhtCnt } from "../../controllers/photos/fndPhtCnt.js";
+import { lstPhtCnt } from "../../controllers/photos/lstPhtCnt.js";
+import { updPhtCnt } from "../../controllers/photos/updPhtCnt.js";
+import { delPhtCnt } from "../../controllers/photos/delPhtCnt.js";
+
+//imports page
+import { regPgsCnt } from "../../controllers/page/regPgsCnt.js";
+import { fndPgsCnt } from "../../controllers/page/fndPgsCnt.js";
+import { lstPgsCnt } from "../../controllers/page/lstPgsCnt.js";
+import { updPgsCnt } from "../../controllers/page/updPgsCnt.js";
+import { delPgsCnt } from "../../controllers/page/delPgsCnt.js";
+
+
 const router = express.Router();
 
 //developer actions
@@ -83,5 +98,20 @@ router.get("/fndTgt", fndTgtCnt);
 router.get("/lstTgt", lstTgtCnt);
 router.put("/updTgt", updTgtCnt);
 router.delete("/delTgt", delTgtCnt);
+
+//photos actions
+router.post("/regPht", regPhtCnt);
+router.get("/fndPht", fndPhtCnt);
+router.get("/lstPht", lstPhtCnt);
+router.put("/updPht", updPhtCnt);
+router.delete("/delPht", delPhtCnt);
+
+//page actions
+router.post("/regPgs", regPgsCnt);
+router.get("/fndPgs", fndPgsCnt);
+router.get("/lstPgs", lstPgsCnt);
+router.put("/updPgs", updPgsCnt);
+router.delete("/delPgs", delPgsCnt);
+
 
 export default router;

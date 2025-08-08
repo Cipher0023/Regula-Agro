@@ -4,12 +4,12 @@ import dotenv from "dotenv";
 dotenv.config();
 const prisma = new PrismaClient();
 
-export const lstPht = async () => {
+export const lstPgs = async () => {
   try {
-    const result = await prisma.photos.findMany();
+    const result = await prisma.page.findMany();
     return result;
   } catch (error) {
-    console.error("Erro ao listar photo:", error.message);
-    throw new Error("Erro ao listar photo.");
+    console.error("Erro ao listar page:", error.message);
+    throw new Error("Erro ao listar page.");
   }
 };

@@ -1,14 +1,12 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-export const updPht = async (photo_id, updateData) => {
+export const updPgs = async (page_id, updateData) => {
   try {
     //não se esqueça de trocar os allowed fields de acordo com o schema.
     const allowedFields = [
-      "source",
-      "description",
-      "creator_id",
-      "news_id",
+      "dev_id",
+
     ];
     const updateFields = {};
     //conversor de boolean
@@ -53,12 +51,12 @@ export const updPht = async (photo_id, updateData) => {
       }
     }
     // verifica se pelo menos um dado vai ser atualizado
-    if (Object.keys(updateFields).length === 0) {
+    if (Object.dev_ids(updateFields).length === 0) {
       throw new Error("Nenhum dado para atualizar");
     }
     // realiza o update tendo como base no updateFields
-    const update = await prisma.photos.update({
-      where: { photo_id },
+    const update = await prisma.page.update({
+      where: { page_id },
       data: updateFields,
     });
     return {

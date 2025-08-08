@@ -1,14 +1,14 @@
-import { fndExm } from "../../services/Example/fndExmSrv.js";
+import { fndPgs } from "../../services/page/fndPgsSrv.js";
 
-export const fndExmCnt = async (req, res) => {
+export const fndPgsCnt = async (req, res) => {
   try {
-    const { example_id } = req.query;
-    if (!example_id) {
+    const { page_id } = req.query;
+    if (!page_id) {
       return res.status(400).json({ message: "Insira dados" });
     }
-    const result = await fndExm(example_id);
+    const result = await fndPgs(page_id);
     if (!result) {
-      return res.status(404).json({ message: "Example não encontrade." });
+      return res.status(404).json({ message: "page não encontrade." });
     }
 
     return res.status(200).json({

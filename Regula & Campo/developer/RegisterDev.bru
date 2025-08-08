@@ -1,0 +1,19 @@
+meta {
+  name: RegisterDev
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3001/public/regDev
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Kaio",
+    "email": "kaiohsasaki@gmail.com",
+    "password": "Senha1234"
+  }
+}

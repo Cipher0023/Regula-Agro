@@ -1,0 +1,24 @@
+meta {
+  name: updPht
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3001/private/updPht
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGQyOTU2M2YxZTA1M2I2NzUzNDE4NyIsImlhdCI6MTc1NDA4MTY3NCwiZXhwIjoxNzU0Njg2NDc0fQ.zae4zWEEvyWOc4KSMJpqAmZFIyCcEDDoRsS4DwOPF6s
+}
+
+body:json {
+  {
+    "photo_id": "68929b9a90a7a57a0974aa40",
+    "updateData": {
+      "description": "Nova descrição"
+    }
+  }
+}

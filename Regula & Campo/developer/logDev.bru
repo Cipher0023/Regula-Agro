@@ -1,0 +1,18 @@
+meta {
+  name: logDev
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3001/public/logDev
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "email": "kaiohsasaki@gmail.com",
+    "password": "Senha1234"
+  }
+}

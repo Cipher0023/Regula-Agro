@@ -1,13 +1,14 @@
-import prisma from "../../prisma/primaClient.js";
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
-export const delExm = async (example_id) => {
+export const delPht = async (photo_id) => {
   try {
-    await prisma.example.delete({
-      where: { example_id },
+    await prisma.photos.delete({
+      where: { photo_id },
     });
-    return { success: true, message: "Example Deletado com sucesso." };
+    return { success: true, message: "photo Deletado com sucesso." };
   } catch (error) {
-    console.error("Erro ao deletar Example", error.message);
-    return { success: false, message: "Erro ao deletar Example" };
+    console.error("Erro ao deletar photo", error.message);
+    return { success: false, message: "Erro ao deletar photo" };
   }
 };

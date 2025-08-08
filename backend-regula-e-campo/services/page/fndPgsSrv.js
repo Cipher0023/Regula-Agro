@@ -4,8 +4,8 @@ import dotenv from "dotenv";
 dotenv.config();
 const prisma = new PrismaClient();
 
-export const fndPht = async (photo_id) => {
-  return await prisma.photos.findUnique({
-    where: { photo_id },
+export const fndPgs = async (page_id) => {
+  return await prisma.page.findUnique({
+    where: { page_id },
   });
 };

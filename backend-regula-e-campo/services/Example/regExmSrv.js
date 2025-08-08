@@ -40,7 +40,7 @@ export const regExm = async (
   //transformando em boolean
   const boolean = booleanConverter(dataBoolean);
   //verificação se registro já existe
-  const existing = await prisma.example.findUnique({
+  const existing = await prisma.example.findFirst({
     where: {
       key: key,
     },

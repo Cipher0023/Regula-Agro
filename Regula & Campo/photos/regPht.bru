@@ -1,0 +1,25 @@
+meta {
+  name: regPht
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3001/private/regPht
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGQyOTU2M2YxZTA1M2I2NzUzNDE4NyIsImlhdCI6MTc1NDA4MTY3NCwiZXhwIjoxNzU0Njg2NDc0fQ.zae4zWEEvyWOc4KSMJpqAmZFIyCcEDDoRsS4DwOPF6s
+}
+
+body:json {
+  { 
+    "dev_id": "Teste123" ,
+    "description": "asdasd",
+    "creator_id": "685c61d01462afbbf25ad913",
+    "news_id": "685caa05cbca4ca41182ba0e"
+  
+  }
+}

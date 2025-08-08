@@ -1,29 +1,33 @@
-import prisma from "../../prisma/primaClient.js";
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
-//service padrão da Cubic para registros em tabelas
-//
+// service padrão da Cubic para registros em tabelas
 export const regPht = async (source, description, creator_id, news_id) => {
-  //verificação de campos
+  // verificação de campos
   if (!source || !description || !creator_id || !news_id) {
     throw new Error("Preencha todos os campos obrigatórios");
   }
-  //conversor de boolean
+
+  // conversor de boolean
   function booleanConverter(value) {
     if (value == "true") return true;
     if (value == "false") return false;
     else {
-      throw new Error("campo contem um valor inválido para boolean");
+      throw new Error("campo contém um valor inválido para boolean");
     }
   }
-  //verificação se registro já existe
-  const existing = await prisma.photos.findUnique({
+
+  // verificação se registro já existe
+  const existing = await prisma.photos.findFirst({
     where: {
       source: source,
     },
   });
+
   if (existing) {
     throw new Error("source já existe");
   }
+
   const newRegister = await prisma.photos.create({
     data: {
       source: source,
@@ -32,5 +36,6 @@ export const regPht = async (source, description, creator_id, news_id) => {
       news_id: news_id,
     },
   });
+
   return newRegister;
 };

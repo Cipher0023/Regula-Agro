@@ -46,7 +46,7 @@ const STYLES: Record<BadgeType, { text: string; bg: string; textColor: string }>
 };
 
 export default function Badge({ type }: BadgeProps) {
-  const style = STYLES[type];
+  const style = STYLES[type] ?? { text: type, bg: 'bg-gray-200', textColor: 'text-gray-800' };
 
   return (
     <div className={`w-fit h-8 inline-flex items-center justify-center px-3 rounded-full font-medium text-sm leading-none ${style.bg} ${style.textColor}`}>
