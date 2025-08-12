@@ -1,0 +1,26 @@
+meta {
+  name: RegisterDev copy
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3001/private/regCre
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGQyOTU2M2YxZTA1M2I2NzUzNDE4NyIsImlhdCI6MTc1NDk0NjcxNywiZXhwIjoxNzU1NTUxNTE3fQ.Nb2DOSFpc9aaZTfFNO1kpL1wg497aGfIDF615WWPCAQ
+}
+
+body:json {
+  {
+    "name": "Teste Excluir",
+    "email": "kaiosasaki@gmail.com",
+    "password": "Senha1234",
+    "document_type": "685c55d25c68436551808a3a",
+    "document_number": "teste",
+    "role_id": "685c3f2e27aba3884d1e6b85" 
+  }
+}

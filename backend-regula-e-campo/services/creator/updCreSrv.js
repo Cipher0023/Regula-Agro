@@ -1,10 +1,7 @@
 import bcrypt from "bcrypt"; // For password hashing
-import { PrismaClient } from "@prisma/client"; // Database ORM
-import dotenv from "dotenv";
-import { fndCre } from "../creator/fndCreSrv.js";
+import prisma from "../../prisma/prismaClient.js";
 
-dotenv.config();
-const prisma = new PrismaClient();
+import { fndCre } from "../creator/fndCreSrv.js";
 
 export const updCre = async (creator_id, updateData) => {
   try {

@@ -1,8 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-import dotenv from "dotenv";
-
-dotenv.config();
-const prisma = new PrismaClient();
+import prisma from "../../prisma/prismaClient.js";
 
 export const chkDev = async (dev_id) => {
   if (!dev_id) return false;

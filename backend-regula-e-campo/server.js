@@ -4,10 +4,12 @@ import privateRoutes from "./routes/private/private.js";
 import auth from "./middlewares/auth.js";
 import cors from "cors";
 import corsOptions from "./configs/corsOptions.js";
+import dotenv from "dotenv";
 
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+dotenv.config();
 
 //rotas publicas
 app.use("/public", publicRoutes);

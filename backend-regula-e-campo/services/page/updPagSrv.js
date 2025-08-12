@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from "../../prisma/prismaClient.js";
 
-export const updPgs = async (page_id, updateData) => {
+
+export const updPag = async (page_id, updateData) => {
   try {
     //não se esqueça de trocar os allowed fields de acordo com o schema.
     const allowedFields = [

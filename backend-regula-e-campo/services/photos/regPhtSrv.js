@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from "../../prisma/prismaClient.js";
+
 
 // service padrão da Cubic para registros em tabelas
 export const regPht = async (source, description, creator_id, news_id) => {

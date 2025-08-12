@@ -1,17 +1,17 @@
-import { delPgs } from "../../services/page/delPgsSrv.js";
-import { fndPgs } from "../../services/page/fndPgsSrv.js";
+import { delPag } from "../../services/page/delPagSrv.js";
+import { fndPag } from "../../services/page/fndPagSrv.js";
 
-export const delPgsCnt = async (req, res) => {
+export const delPagCnt = async (req, res) => {
   const { page_id } = req.body;
   try {
     if (!page_id) {
       return res.status(400).json({ message: "id obrigatório" });
     }
-    const existing = fndPgs(page_id);
+    const existing = fndPag(page_id);
     if (!existing) {
       return res.status(404).json({ message: "page não encontrade." });
     }
-    const result = await delPgs(page_id);
+    const result = await delPag(page_id);
     return res.status(200).json(result);
   } catch (error) {
     console.error("Erro ao deletar:", error.message);

@@ -1,15 +1,22 @@
 meta {
-  name: lstCre
+  name: delNws
   type: http
-  seq: 2
+  seq: 5
 }
 
-get {
-  url: http://localhost:3001/private/lstCre
-  body: none
+delete {
+  url: http://localhost:3001/private/delNws
+  body: json
   auth: bearer
 }
 
 auth:bearer {
   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGQyOTU2M2YxZTA1M2I2NzUzNDE4NyIsImlhdCI6MTc1NDk0NjcxNywiZXhwIjoxNzU1NTUxNTE3fQ.Nb2DOSFpc9aaZTfFNO1kpL1wg497aGfIDF615WWPCAQ
+}
+
+body:json {
+  {
+    "news_id": "685caa05cbca4ca41182ba0e"
+  }
+  
 }

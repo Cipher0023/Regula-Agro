@@ -1,12 +1,12 @@
-import { fndPgs } from "../../services/page/fndPgsSrv.js";
+import { fndPag } from "../../services/page/fndPagSrv.js";
 
-export const fndPgsCnt = async (req, res) => {
+export const fndPagCnt = async (req, res) => {
   try {
     const { page_id } = req.query;
     if (!page_id) {
       return res.status(400).json({ message: "Insira dados" });
     }
-    const result = await fndPgs(page_id);
+    const result = await fndPag(page_id);
     if (!result) {
       return res.status(404).json({ message: "page não encontrade." });
     }

@@ -1,10 +1,7 @@
 import bcrypt from "bcrypt"; // For password hashing
-import { PrismaClient } from "@prisma/client"; // Database ORM
-import dotenv from "dotenv";
+import prisma from "../../prisma/prismaClient.js";
 import { fndDev } from "../developer/fndDevSrv.js";
 
-dotenv.config();
-const prisma = new PrismaClient();
 
 export const updDev = async (dev_id, updateData) => {
   try {

@@ -1,9 +1,6 @@
-import { PrismaClient } from "@prisma/client"; // Database ORM
-import dotenv from "dotenv";
 import { regPht } from "../../services/photos/regPhtSrv.js";
+import prisma from "../../prisma/prismaClient.js";
 
-dotenv.config();
-const prisma = new PrismaClient();
 
 export const regPhtCnt = async (req, res) => {
   try {

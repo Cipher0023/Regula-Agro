@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from "../../prisma/prismaClient.js";
 
-export const delPgs = async (page_id) => {
+export const delPag = async (page_id) => {
   try {
     await prisma.page.delete({
       where: { page_id },

@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from "../../prisma/prismaClient.js";
+
 
 export const delPht = async (photo_id) => {
   try {

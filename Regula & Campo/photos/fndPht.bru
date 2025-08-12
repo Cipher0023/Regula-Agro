@@ -1,28 +1,27 @@
 meta {
   name: fndPht
   type: http
-  seq: 2
+  seq: 3
 }
 
 get {
-  url: http://localhost:3001/private/fndPht?photo_id=68929b9a90a7a57a0974aa40
-  body: json
+  url: http://localhost:3001/private/fndPht?photo_id=688d2c654a0fa83432d26fa0
+  body: none
   auth: bearer
 }
 
 params:query {
-  photo_id: 68929b9a90a7a57a0974aa40
+  photo_id: 688d2c654a0fa83432d26fa0
 }
 
 auth:bearer {
-  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGQyOTU2M2YxZTA1M2I2NzUzNDE4NyIsImlhdCI6MTc1NDA4MTY3NCwiZXhwIjoxNzU0Njg2NDc0fQ.zae4zWEEvyWOc4KSMJpqAmZFIyCcEDDoRsS4DwOPF6s
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGQyOTU2M2YxZTA1M2I2NzUzNDE4NyIsImlhdCI6MTc1NDk0NjcxNywiZXhwIjoxNzU1NTUxNTE3fQ.Nb2DOSFpc9aaZTfFNO1kpL1wg497aGfIDF615WWPCAQ
 }
 
 body:json {
   [
     {
       "photo_id": "688d2c654a0fa83432d26fa0"
-      
     }
-    ]
+  ]
 }

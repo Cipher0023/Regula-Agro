@@ -1,11 +1,11 @@
 meta {
-  name: delPht
+  name: regPag
   type: http
-  seq: 5
+  seq: 1
 }
 
-delete {
-  url: http://localhost:3001/private/delPht
+post {
+  url: http://localhost:3001/private/regPag
   body: json
   auth: bearer
 }
@@ -15,11 +15,8 @@ auth:bearer {
 }
 
 body:json {
+  { 
+    "dev_id": "688d29563f1e053b67534187" 
   
-  [
-    {
-    "page_id": "68934557b2279882cdba8faa"
-    }
-    ]
-  
+  }
 }
