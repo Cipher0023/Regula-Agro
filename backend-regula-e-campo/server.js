@@ -1,7 +1,6 @@
 import express from "express";
 import publicRoutes from "./routes/public/public.js";
 import privateRoutes from "./routes/private/private.js";
-import uploader from "./services/image/uploader.js";
 import auth from "./middlewares/auth.js";
 import cors from "cors";
 import corsOptions from "./configs/corsOptions.js";

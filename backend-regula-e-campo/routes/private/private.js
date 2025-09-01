@@ -1,7 +1,6 @@
 import express from "express";
 
 //imports role
-import { fndDevCnt } from "../../controllers/developer/fndDevCnt.js";
 import { lstDevCnt } from "../../controllers/developer/lstDevCnt.js";
 import { updDevCnt } from "../../controllers/developer/updDevCnt.js";
 import { delDevCnt } from "../../controllers/developer/delDevCnt.js";
@@ -48,16 +47,6 @@ import { lstPhtCnt } from "../../controllers/photos/lstPhtCnt.js";
 import { updPhtCnt } from "../../controllers/photos/updPhtCnt.js";
 import { delPhtCnt } from "../../controllers/photos/delPhtCnt.js";
 
-//imports page
-import { regPagCnt } from "../../controllers/page/regPagCnt.js";
-import { fndPagCnt } from "../../controllers/page/fndPagCnt.js";
-import { lstPagCnt } from "../../controllers/page/lstPagCnt.js";
-import { updPagCnt } from "../../controllers/page/updPagCnt.js";
-import { delPagCnt } from "../../controllers/page/delPagCnt.js";
-
-
-
-
 //import Rdr
 import { regRdrCnt } from "../../controllers/reader/regRdrCnt.js";
 import { fndRdrCnt } from "../../controllers/reader/fndRdrCnt.js";
@@ -68,7 +57,6 @@ import { delRdrCnt } from "../../controllers/reader/delRdrCnt.js";
 const router = express.Router();
 
 //developer actions
-router.get("/fndDev", fndDevCnt);
 router.get("/lstDev", lstDevCnt);
 router.put("/updDev", updDevCnt);
 router.delete("/delDev", delDevCnt);
@@ -115,22 +103,11 @@ router.get("/lstPht", lstPhtCnt);
 router.put("/updPht", updPhtCnt);
 router.delete("/delPht", delPhtCnt);
 
-//page actions
-router.post("/regPag", regPagCnt);
-router.get("/fndPag", fndPagCnt);
-router.get("/lstPag", lstPagCnt);
-router.put("/updPag", updPagCnt);
-router.delete("/delPag", delPagCnt);
-
-
-
-
 //Rdr actions
 router.post("/regRdr", regRdrCnt);
 router.get("/fndRdr", fndRdrCnt);
 router.get("/lstRdr", lstRdrCnt);
 router.put("/updRdr", updRdrCnt);
 router.delete("/delRdr", delRdrCnt);
-
 
 export default router;

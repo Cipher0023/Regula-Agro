@@ -2,8 +2,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import prisma from "../../prisma/prismaClient.js";
 
-
-
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export const logDev = async (email, password) => {

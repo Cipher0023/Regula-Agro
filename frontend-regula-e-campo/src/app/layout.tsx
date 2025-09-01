@@ -10,6 +10,7 @@ import {
   useViewportContext,
   ViewportProvider,
 } from "@/contexts/ViewportContext";
+import { AppHydrator } from "@/components/Cubic/Hydrators/App_hydrator";
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const { isMobile } = useViewportContext();
@@ -53,7 +54,9 @@ export default function RootLayout({
     <html lang="pt-BR" className="overflow-x-hidden">
       <body className="w-screen overflow-x-hidden min-w-0 md:w-full md:overflow-x-visible md:min-w-full">
         <ViewportProvider>
-          <LayoutContent>{children}</LayoutContent>
+          <AppHydrator>
+            <LayoutContent>{children}</LayoutContent>
+          </AppHydrator>
         </ViewportProvider>
       </body>
     </html>

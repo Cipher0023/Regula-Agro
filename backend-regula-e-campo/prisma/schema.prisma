@@ -18,9 +18,9 @@ model Developer {
   name String 
   email String @unique
   password String
+  image String?
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  pages Page[]
   document_types Document_type[]
   tags Tag_types[]
   roles Role[]
@@ -33,6 +33,7 @@ model Reader{
   password String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  image String?
   like Likes[]
   comment Comments[]
   breadcrumbs Reader_breadecrumbs[]
@@ -53,7 +54,6 @@ model Comments{
   reader Reader @relation(fields: [reader_id], references: [reader_id])
   news_id String @db.ObjectId
   news News @relation(fields: [news_id], references: [news_id])
-  title String
   text String
   created_at DateTime @default(now())
 }
@@ -63,14 +63,6 @@ model Reader_breadecrumbs{
   reader_id String @db.ObjectId
   reader Reader @relation(fields: [reader_id], references: [reader_id])
   created_at DateTime @default(now())
-}
-
-model Page{
-  page_id String @id @default (auto()) @map("_id") @db.ObjectId
-  dev_id String @db.ObjectId
-  developer Developer @relation(fields: [dev_id], references: [dev_id])
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
 }
 
 model Document_type{
@@ -115,6 +107,8 @@ model Creator{
   role Role @relation(fields: [role_id], references: [role_id])
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  creator_image String @db.ObjectId
+  image String?
   photos Photos[]
   created_news News[]
   naratives Narative[]
@@ -130,9 +124,11 @@ model News{
   updated_at DateTime @updatedAt
   tag String @db.ObjectId
   tag_types Tag_types @relation(fields: [tag], references: [tag_id])
+  main_image String @db.ObjectId 
+  photos Photos @relation(fields: [main_image], references: [photo_id])
+  secondary_photos String?
   like Likes[]
   comment Comments[]
-  photos Photos[]
 }
 
 model Photos{
@@ -141,9 +137,8 @@ model Photos{
   description String
   creator_id String @db.ObjectId
   creator Creator @relation(fields: [creator_id], references: [creator_id])
-  news_id String @db.ObjectId
-  news News @relation(fields: [news_id], references: [news_id])
   created_at DateTime @default(now())
+  news News[]
 }
 
 model Narative{

@@ -1,19 +1,18 @@
 "use client";
 import React from "react";
-import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import useUserStore from "../../stores/useCreStore";
+import useDevStore from "../../stores/useDevStore";
 
 type Props = object;
 
-export default function LogMenu({}: Props) {
+export default function LogMenuInterno({}: Props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const router = useRouter();
-  const setUser = useUserStore((state) => state.setUser);
+  const setDev = useDevStore((state) => state.setDev);
 
   const handleLogin = async () => {
     try {
@@ -29,10 +28,10 @@ export default function LogMenu({}: Props) {
       const data = await response.json();
 
       if (response.ok) {
-        setSuccess("Login feito com sucesso!");
+        setSuccess("Login de dev feito com sucesso!");
         setError("");
         console.log("Dados recebidos:", data);
-        setUser({
+        setDev({
           id: data.developer.dev_id,
           name: data.developer.name,
           email: data.developer.email,
@@ -51,7 +50,7 @@ export default function LogMenu({}: Props) {
     <div className="flex flex-col justify-center items-center min-h-screen">
       <div className="bg-[#1B5E20] shadow-lg p-5 rounded-3xl w-full max-w-md font-semibold text-white">
         <div className="flex justify-center items-center mb-4">
-          <div className="text-2xl">Login</div>
+          <div className="text-2xl">Login interno</div>
         </div>
         <div className="mb-2">Insira seu email</div>
         <input
@@ -83,12 +82,6 @@ export default function LogMenu({}: Props) {
           <p className="bg-base-100 mt-2 text-green-500">{success}</p>
         )}
       </div>
-      <div className="mb-4 text-gray-900 text-lg"> não tem conta? </div>
-      <Link href="/cadastro" className="">
-        <div className="m-2 text-blue-500 hover:text-blue-950 transition-colors duration-200">
-          Crie sua conta Regula e Campo
-        </div>
-      </Link>
     </div>
   );
 }

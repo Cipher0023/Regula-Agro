@@ -1,32 +1,30 @@
+"use client";
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useViewportContext } from "@/contexts/ViewportContext";
-import { User } from 'lucide-react';
-import { ThumbsUp } from 'lucide-react';
-import { LogOut } from 'lucide-react';
+import { User } from "lucide-react";
+import { ThumbsUp } from "lucide-react";
+import { LogOut } from "lucide-react";
+import { useAuthStore } from "@/stores/authStore";
+import useDevStore from "@/stores/useDevStore";
 
-
-interface LoginButtonProps {
-  isLoggedIn: boolean;
-  userName?: string;
-  userImageUrl?: string;
-  onLogout?: () => void; // Adicionado para lidar com logout
-}
-
-export default function LoginButton({
-  isLoggedIn,
-  userName,
-  userImageUrl,
-  onLogout,
-}: LoginButtonProps) {
+export default function LoginButton() {
   const { isMobile } = useViewportContext();
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLDivElement>(null);
+    const user = useAuthStore((s) => s.user);
+  const logout = useAuthStore((s) => s.logout);
+  const dev = useDevStore((s) => s.dev);
+  const logged = Boolean(dev || user);
+  const displayName = dev?.name ?? user?.name ?? "";
 
   // Fecha ao clicar fora
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+      if (
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     }
@@ -35,40 +33,68 @@ export default function LoginButton({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  if (isMobile && isLoggedIn) {
+  // Estado deslogado: botão de entrar (mobile e desktop)
+  if (!logged) {
+    return (
+      <div className="relative" ref={buttonRef}>
+        <Link
+          href="/login"
+          className={`flex items-center justify-center bg-[#2E7D32] hover:bg-[#27632a] transition-colors rounded-full h-10 px-4 text-white text-sm font-bold ${isMobile ? "w-24" : ""}`}
+        >
+          <User size={18} className="mr-2" />
+          Entrar
+        </Link>
+      </div>
+    );
+  }
+
+  if (isMobile && logged) {
     return (
       <div className="relative" ref={buttonRef}>
         <div
-          className="bg-[#2E7D32] flex items-center justify-center rounded-full p-1 h-10 w-10 overflow-hidden cursor-pointer"
+          className="flex justify-center items-center bg-[#2E7D32] p-1 rounded-full w-10 h-10 overflow-hidden cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {userImageUrl ? (
-            <img src={userImageUrl} alt="Foto de perfil" className="w-full h-full object-cover rounded-full" />
+          {user?.imageUrl ? (
+            <img
+              src={user.imageUrl}
+              alt="Foto de perfil"
+              className="rounded-full w-full h-full object-cover"
+            />
           ) : (
-            <div className="w-full h-full bg-gray-200 rounded-full" />
+            <div className="bg-gray-200 rounded-full w-full h-full" />
           )}
         </div>
 
         {/* Dropdown */}
         {isOpen && (
-          <div className="absolute right-0 p-2 mt-2 w-52 bg-white rounded-2xl shadow-md z-50">
-          <Link href="/perfil" className="flex items-center px-4 py-3 rounded-2xl hover:bg-gray-100">
-            <span className="text-sm flex flex-row gap-2 items-center">
-              <User size={18} /> Ver perfil</span>
+          <div className="right-0 z-50 absolute bg-white shadow-md mt-2 p-2 rounded-2xl w-52">
+            <Link
+              href="/perfil"
+              className="flex items-center hover:bg-gray-100 px-4 py-3 rounded-2xl"
+            >
+              <span className="flex flex-row items-center gap-2 text-sm">
+                <User size={18} /> Ver perfil
+              </span>
             </Link>
-            <Link href="/curtidas" className="flex items-center px-4 py-3 rounded-2xl hover:bg-gray-100">
-            <span className="text-sm flex flex-row gap-2 items-center">
-              <ThumbsUp size={18} /> Notícias curtidas</span>
+            <Link
+              href="/curtidas"
+              className="flex items-center hover:bg-gray-100 px-4 py-3 rounded-2xl"
+            >
+              <span className="flex flex-row items-center gap-2 text-sm">
+                <ThumbsUp size={18} /> Notícias curtidas
+              </span>
             </Link>
             <button
               onClick={() => {
                 setIsOpen(false);
-                onLogout?.(); // chama função de logout
+                logout();
               }}
-              className="flex items-center w-full px-4 py-3 text-left hover:bg-gray-100"
+              className="flex items-center hover:bg-gray-100 px-4 py-3 w-full text-left"
             >
-              <span className="text-sm flex flex-row gap-2 items-center">
-              <LogOut size={18} /> Sair da sessão</span>
+              <span className="flex flex-row items-center gap-2 text-sm">
+                <LogOut size={18} /> Sair da sessão
+              </span>
             </button>
           </div>
         )}
@@ -79,41 +105,52 @@ export default function LoginButton({
   return (
     <div className="relative" ref={buttonRef}>
       <div
-        className="bg-[#2E7D32] flex flex-row rounded-full p-1 items-center h-10 space-x-1 cursor-pointer"
+        className="flex flex-row items-center space-x-1 bg-[#2E7D32] p-1 rounded-full h-10 cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {userImageUrl ? (
-          <div className="w-10 h-10 rounded-full overflow-hidden">
-            <img src={userImageUrl} alt="Foto de perfil" className="w-full h-full object-cover" />
+        {user?.imageUrl ? (
+          <div className="rounded-full w-10 h-10 overflow-hidden">
+            <img
+              src={user.imageUrl}
+              alt="Foto de perfil"
+              className="w-full h-full object-cover"
+            />
           </div>
         ) : (
-          <div className="w-8 h-8 rounded-full bg-gray-200" />
+          <div className="bg-gray-200 rounded-full w-8 h-8" />
         )}
 
-        <div className="text-white text-xs font-bold m-2">
-          {userName}
-        </div>
+        <div className="m-2 font-bold text-white text-xs">{displayName}</div>
       </div>
 
       {isOpen && (
-        <div className="absolute right-0 p-2 mt-2 w-52 bg-white rounded-2xl shadow-md z-50">
-          <Link href="/perfil" className="flex items-center px-4 py-3 rounded-2xl hover:bg-gray-100">
-            <span className="text-sm flex flex-row gap-2 items-center">
-              <User size={18} /> Ver perfil</span>
+        <div className="right-0 z-50 absolute bg-white shadow-md mt-2 p-2 rounded-2xl w-52">
+          <Link
+            href="/perfil"
+            className="flex items-center hover:bg-gray-100 px-4 py-3 rounded-2xl"
+          >
+            <span className="flex flex-row items-center gap-2 text-sm">
+              <User size={18} /> Ver perfil
+            </span>
           </Link>
-          <Link href="/curtidas" className="flex items-center px-4 py-3 rounded-2xl hover:bg-gray-100">
-            <span className="text-sm flex flex-row gap-2 items-center">
-              <ThumbsUp size={18} /> Notícias curtidas</span>
+          <Link
+            href="/curtidas"
+            className="flex items-center hover:bg-gray-100 px-4 py-3 rounded-2xl"
+          >
+            <span className="flex flex-row items-center gap-2 text-sm">
+              <ThumbsUp size={18} /> Notícias curtidas
+            </span>
           </Link>
           <button
             onClick={() => {
               setIsOpen(false);
-              onLogout?.();
+              logout();
             }}
-            className="flex items-center w-full px-4 py-3 text-left rounded-2xl hover:bg-gray-100"
+            className="flex items-center hover:bg-gray-100 px-4 py-3 rounded-2xl w-full text-left"
           >
-            <span className="text-sm flex flex-row gap-2 items-center">
-              <LogOut size={18} /> Sair da sessão</span>
+            <span className="flex flex-row items-center gap-2 text-sm">
+              <LogOut size={18} /> Sair da sessão
+            </span>
           </button>
         </div>
       )}
