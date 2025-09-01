@@ -1,9 +1,4 @@
-import { PrismaClient } from "@prisma/client"; // Database ORM
-import dotenv from "dotenv";
-
-dotenv.config();
-const prisma = new PrismaClient();
-
+import prisma from "../../prisma/prismaClient.js";
 export const delRol = async (role_id) => {
   try {
     const existing = await prisma.role.findUnique({

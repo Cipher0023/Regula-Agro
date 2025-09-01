@@ -1,11 +1,11 @@
 meta {
-  name: regPgs
+  name: delLikes
   type: http
-  seq: 1
+  seq: 5
 }
 
-post {
-  url: http://localhost:3001/private/regPgs
+delete {
+  url: http://localhost:3001/private/delLikes
   body: json
   auth: bearer
 }
@@ -15,8 +15,11 @@ auth:bearer {
 }
 
 body:json {
-  { 
-    "dev_id": "688d29563f1e053b67534187" 
   
-  }
+  [
+    {
+    "page_id": "68934557b2279882cdba8faa"
+    }
+    ]
+  
 }

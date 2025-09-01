@@ -49,12 +49,21 @@ import { updPhtCnt } from "../../controllers/photos/updPhtCnt.js";
 import { delPhtCnt } from "../../controllers/photos/delPhtCnt.js";
 
 //imports page
-import { regPgsCnt } from "../../controllers/page/regPgsCnt.js";
-import { fndPgsCnt } from "../../controllers/page/fndPgsCnt.js";
-import { lstPgsCnt } from "../../controllers/page/lstPgsCnt.js";
-import { updPgsCnt } from "../../controllers/page/updPgsCnt.js";
-import { delPgsCnt } from "../../controllers/page/delPgsCnt.js";
+import { regPagCnt } from "../../controllers/page/regPagCnt.js";
+import { fndPagCnt } from "../../controllers/page/fndPagCnt.js";
+import { lstPagCnt } from "../../controllers/page/lstPagCnt.js";
+import { updPagCnt } from "../../controllers/page/updPagCnt.js";
+import { delPagCnt } from "../../controllers/page/delPagCnt.js";
 
+
+
+
+//import Rdr
+import { regRdrCnt } from "../../controllers/reader/regRdrCnt.js";
+import { fndRdrCnt } from "../../controllers/reader/fndRdrCnt.js";
+import { lstRdrCnt } from "../../controllers/reader/lstRdrCnt.js";
+import { updRdrCnt } from "../../controllers/reader/updRdrCnt.js";
+import { delRdrCnt } from "../../controllers/reader/delRdrCnt.js";
 
 const router = express.Router();
 
@@ -107,11 +116,21 @@ router.put("/updPht", updPhtCnt);
 router.delete("/delPht", delPhtCnt);
 
 //page actions
-router.post("/regPgs", regPgsCnt);
-router.get("/fndPgs", fndPgsCnt);
-router.get("/lstPgs", lstPgsCnt);
-router.put("/updPgs", updPgsCnt);
-router.delete("/delPgs", delPgsCnt);
+router.post("/regPag", regPagCnt);
+router.get("/fndPag", fndPagCnt);
+router.get("/lstPag", lstPagCnt);
+router.put("/updPag", updPagCnt);
+router.delete("/delPag", delPagCnt);
+
+
+
+
+//Rdr actions
+router.post("/regRdr", regRdrCnt);
+router.get("/fndRdr", fndRdrCnt);
+router.get("/lstRdr", lstRdrCnt);
+router.put("/updRdr", updRdrCnt);
+router.delete("/delRdr", delRdrCnt);
 
 
 export default router;

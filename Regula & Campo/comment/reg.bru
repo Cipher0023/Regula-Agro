@@ -1,0 +1,25 @@
+meta {
+  name: reg
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3001/private/regComment
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGQyOTU2M2YxZTA1M2I2NzUzNDE4NyIsImlhdCI6MTc1NDk0NjcxNywiZXhwIjoxNzU1NTUxNTE3fQ.Nb2DOSFpc9aaZTfFNO1kpL1wg497aGfIDF615WWPCAQ
+}
+
+body:json {
+  { 
+    "reader_id": "689d121b1ae23641ee31e7b5",
+    "news_id": "685caa05cbca4ca41182ba0e",
+    "title": "teste" ,
+    "text": "teste" 
+  
+  }
+}

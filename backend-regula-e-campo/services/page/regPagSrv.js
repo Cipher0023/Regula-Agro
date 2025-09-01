@@ -1,9 +1,8 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from "../../prisma/prismaClient.js";
 
 //service padrão da Cubic para registros em tabelas
 
-export const regPgs = async (
+export const regPag = async (
   dev_id
 ) => {
   //verificação de campos

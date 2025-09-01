@@ -1,14 +1,14 @@
-import { fndPgs } from "../../services/page/fndPgsSrv.js";
+import { fndRdr } from "../../services/reader/fndRdrSrv.js";
 
-export const fndPgsCnt = async (req, res) => {
+export const fndRdrCnt = async (req, res) => {
   try {
-    const { page_id } = req.query;
-    if (!page_id) {
+    const { reader_id } = req.query;
+    if (!reader_id) {
       return res.status(400).json({ message: "Insira dados" });
     }
-    const result = await fndPgs(page_id);
+    const result = await fndRdr(reader_id);
     if (!result) {
-      return res.status(404).json({ message: "page não encontrade." });
+      return res.status(404).json({ message: "reader não encontrade." });
     }
 
     return res.status(200).json({

@@ -1,11 +1,11 @@
 meta {
-  name: updPht
+  name: del
   type: http
-  seq: 4
+  seq: 5
 }
 
-put {
-  url: http://localhost:3001/private/updPgs
+delete {
+  url: http://localhost:3001/private/delComment
   body: json
   auth: bearer
 }
@@ -15,10 +15,11 @@ auth:bearer {
 }
 
 body:json {
-  {
-    "page_id": "68934557b2279882cdba8faa",
-    "updateData": {
-      
+  
+  [
+    {
+    "page_id": "68934557b2279882cdba8faa"
     }
-  }
+    ]
+  
 }

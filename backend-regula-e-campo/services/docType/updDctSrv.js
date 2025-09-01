@@ -1,8 +1,5 @@
-import { PrismaClient } from "@prisma/client"; // Database ORM
-import dotenv from "dotenv";
+import prisma from "../../prisma/prismaClient.js";
 
-dotenv.config();
-const prisma = new PrismaClient();
 
 export const updDct = async (document_type_id, updateData) => {
   try {

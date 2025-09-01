@@ -1,13 +1,13 @@
-import { fndPgs } from "../../services/page/fndPgsSrv.js";
-import { updPgs } from "../../services/page/updPgsSrv.js";
+import { fndPag } from "../../services/page/fndPagSrv.js";
+import { updPag } from "../../services/page/updPagSrv.js";
 
-export const updPgsCnt = async (req, res) => {
+export const updPagCnt = async (req, res) => {
   const { page_id, updateData } = req.body;
   try {
     if (!page_id) {
       return res.status(400).json({ message: "Id obrigatório." });
     }
-    const existing = await fndPgs(page_id);
+    const existing = await fndPag(page_id);
     if (!existing) {
       return res.status(404).json({ message: " page Não encontrade." });
     }
@@ -15,7 +15,7 @@ export const updPgsCnt = async (req, res) => {
       page_id: existing.page_id,
       ...updateData,
     };
-    const result = await updPgs(page_id, updateData);
+    const result = await updPag(page_id, updateData);
     return res.status(200).json(result);
   } catch (error) {
     console.error("Erro ao fazer update:", error.message);
