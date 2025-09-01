@@ -1,11 +1,11 @@
 meta {
-  name: regNws
+  name: reg
   type: http
   seq: 1
 }
 
 post {
-  url: http://localhost:3001/private/regNws
+  url: http://localhost:3001/private/regComment
   body: json
   auth: bearer
 }
@@ -16,10 +16,10 @@ auth:bearer {
 
 body:json {
   { 
-    "title": "Noticia Teste" ,
-    "text": "Teste",
-    "creator_id": "685c61d01462afbbf25ad913",
-    "tag": "teste"
+    "reader_id": "689d121b1ae23641ee31e7b5",
+    "news_id": "685caa05cbca4ca41182ba0e",
+    "title": "teste" ,
+    "text": "teste" 
   
   }
 }

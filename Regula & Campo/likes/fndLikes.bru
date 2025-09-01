@@ -1,0 +1,28 @@
+meta {
+  name: fndLikes
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3001/private/fndLikes?page_id=68934557b2279882cdba8faa
+  body: none
+  auth: bearer
+}
+
+params:query {
+  page_id: 68934557b2279882cdba8faa
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGQyOTU2M2YxZTA1M2I2NzUzNDE4NyIsImlhdCI6MTc1NDA4MTY3NCwiZXhwIjoxNzU0Njg2NDc0fQ.zae4zWEEvyWOc4KSMJpqAmZFIyCcEDDoRsS4DwOPF6s
+}
+
+body:json {
+  [
+    {
+      "photo_id": "68934557b2279882cdba8faa"
+      
+    }
+    ]
+}

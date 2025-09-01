@@ -33,8 +33,8 @@ model Reader{
   password String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  likes Likes[]
-  comments Comments[]
+  like Likes[]
+  comment Comments[]
   breadcrumbs Reader_breadecrumbs[]
 }
 
@@ -130,8 +130,8 @@ model News{
   updated_at DateTime @updatedAt
   tag String @db.ObjectId
   tag_types Tag_types @relation(fields: [tag], references: [tag_id])
-  likes Likes[]
-  comments Comments[]
+  like Likes[]
+  comment Comments[]
   photos Photos[]
 }
 
