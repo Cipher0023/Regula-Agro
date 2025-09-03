@@ -1,7 +1,5 @@
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET;
-
 /**
  * Gera um JWT padronizado para toda a aplicação.
  * O payload contém exatamente 3 campos: { type, id, role }
@@ -18,8 +16,8 @@ const JWT_SECRET = process.env.JWT_SECRET;
  * @returns {string} token JWT assinado
  */
 export const generateToken = (params, options = {}) => {
+  const JWT_SECRET = process.env.JWT_SECRET;
   if (!JWT_SECRET) {
-    // Evita quebrar o servidor no import, mas alerta imediatamente.
     console.warn("JWT_SECRET não está definido nas variáveis de ambiente.");
   }
 
