@@ -1,10 +1,9 @@
 import prisma from "../../prisma/prismaClient.js";
 
-
 // service padrão da Cubic para registros em tabelas
-export const regPht = async (source, description, creator_id, news_id) => {
+export const regPht = async (source, description, creator_id) => {
   // verificação de campos
-  if (!source || !description || !creator_id || !news_id) {
+  if (!source || !description || !creator_id) {
     throw new Error("Preencha todos os campos obrigatórios");
   }
 
@@ -33,7 +32,6 @@ export const regPht = async (source, description, creator_id, news_id) => {
       source: source,
       description: description,
       creator_id: creator_id,
-      news_id: news_id,
     },
   });
 
