@@ -35,6 +35,7 @@ export function useCheckDev() {
                 id: data.result.dev_id,
                 name: data.result.name,
                 email: data.result.email,
+                image: data.result.image,
               };
               console.log("[useCheckDev] Dev mapeado para o store:", mappedDev);
               setDev(mappedDev);

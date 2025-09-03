@@ -1,14 +1,13 @@
 "use client";
 import React, { ReactNode, useEffect } from "react";
-import { useCheckUser } from "@/hooks/useCheckCre";
+import { useCheckCre } from "@/hooks/useCheckCre";
 import useNwsStore from "@/stores/useNwsStore";
 import { useCheckDev } from "@/hooks/useCheckDev";
 
 export function AppHydrator({ children }: { children: ReactNode }) {
   // User hydration
-  useCheckUser();
-
-  // Dev hydration
+  useCheckCre();
+  useCheckDev();
   useCheckDev();
 
   // Other domain hydrations

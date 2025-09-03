@@ -5,6 +5,7 @@ export interface Dev {
   id: string;
   name: string;
   email: string;
+  image: string;
 }
 
 // Definição do estado e das ações do store

@@ -1,14 +1,14 @@
 import bcrypt from "bcrypt"; // For password hashing
 import prisma from "../../prisma/prismaClient.js";
 
-
 export const regCre = async (
   name,
   email,
   password,
   document_type,
   document_number,
-  role_id
+  role_id,
+  creator_image
 ) => {
   console.log("Dados recebidos:", {
     name,
@@ -17,6 +17,7 @@ export const regCre = async (
     document_type,
     document_number,
     role_id,
+    creator_image,
   });
 
   if (
@@ -55,6 +56,7 @@ export const regCre = async (
           role_id: role_id,
         },
       },
+      creator_image: creator_image,
     },
   });
   return newUser;

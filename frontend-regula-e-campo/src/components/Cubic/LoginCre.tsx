@@ -2,7 +2,10 @@
 import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import useUserStore from "../../stores/useCreStore";
+import useCreStore from "../../stores/useCreStore";
+import useRdrStore from "@/stores/useRdrStore";
+import useDevStore from "@/stores/useDevStore";
+import { useSessionStore } from "@/stores/sessionStore";
 
 type Props = object;
 
@@ -12,11 +15,14 @@ function Inside_form({}: Props) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const router = useRouter();
-  const setUser = useUserStore((state) => state.setUser);
+  const setCre = useCreStore((state) => state.setCre);
+  const clearRdr = useRdrStore((s) => s.clearRdr);
+  const clearDev = useDevStore((s) => s.clearDev);
+  const loginAs = useSessionStore((s) => s.loginAs);
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("https://localhost:3002/public/logUsr", {
+      const response = await fetch("https://localhost:3002/public/logCre", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,10 +37,20 @@ function Inside_form({}: Props) {
         setSuccess("Login feito com sucesso!");
         setError("");
         console.log("Dados recebidos:", data);
-        setUser({
-          id: data.user.user_id,
-          name: data.user.name,
-          email: data.user.email,
+        // Garantir login único
+        clearRdr();
+        clearDev();
+        setCre({
+          id: data.creator.creator_id,
+          name: data.creator.name,
+          email: data.creator.email,
+          image: data.creator.image,
+        });
+        loginAs("creator", {
+          id: data.creator.creator_id,
+          name: data.creator.name,
+          email: data.creator.email,
+          imageUrl: data.creator.image ?? null,
         });
         router.push("/gerenciamentorestaurante/dashboard");
       } else {

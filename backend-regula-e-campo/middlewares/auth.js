@@ -11,24 +11,23 @@ const JWT_SECRET = process.env.JWT_SECRET;
  * @returns {void}
  */
 const auth = (req, res, next) => {
-  // Get token from request headers
-  const token = req.headers.authorization;
+  const cookieToken = req.cookies?.token;
+  const token = cookieToken;
 
-  // Check if token exists
+  // Se não houver token em nenhuma fonte, nega acesso
   if (!token) {
     return res.status(401).json({ message: "Acesso negado" });
   }
 
   try {
-    // Verify and decode the JWT token, removing 'Bearer ' prefix
-    const decoded = jwt.verify(token.replace("Bearer ", ""), JWT_SECRET);
-    console.log(decoded);
+    // Verifica e decodifica o JWT
+    const decoded = jwt.verify(token, JWT_SECRET);
+    // Disponibiliza o payload para os próximos handlers
+    req.user = decoded;
   } catch (err) {
-    // Return error if token is invalid
     return res.status(401).json({ message: "Token inválido" });
   }
 
-  // Proceed to next middleware
   next();
 };
 

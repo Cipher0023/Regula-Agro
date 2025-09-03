@@ -1,0 +1,22 @@
+meta {
+  name: logRdr
+  type: http
+  seq: 6
+}
+
+post {
+  url: https://localhost:3002/public/logRdr
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "email": "teste2@gmail.com",
+    "password": "senha123"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

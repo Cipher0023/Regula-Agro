@@ -1,7 +1,8 @@
 import prisma from "../../prisma/prismaClient.js";
+import bcrypt from "bcrypt";
 
 // service padrão da Cubic para registros em tabelas
-export const regRdr = async (name, email, password) => {
+export const regRdr = async (name, email, password, image) => {
   // verificação de campos obrigatórios
   if (!name || !email || !password) {
     throw new Error("Preencha todos os campos obrigatórios");
@@ -17,13 +18,15 @@ export const regRdr = async (name, email, password) => {
   if (existing) {
     throw new Error("name já existe");
   }
-
+  const salt = await bcrypt.genSalt(10);
+  const hashpassword = await bcrypt.hash(password, salt);
   // criação do registro
   const newRegister = await prisma.reader.create({
     data: {
-      name,
-      email,
-      password,
+      name: name,
+      email: email,
+      password: hashpassword,
+      image: image,
     },
   });
 

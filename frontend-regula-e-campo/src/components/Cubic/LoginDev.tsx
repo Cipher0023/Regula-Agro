@@ -2,6 +2,10 @@
 import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import useRdrStore from "@/stores/useRdrStore";
+import useCreStore from "@/stores/useCreStore";
+import useDevStore from "@/stores/useDevStore";
+import { useSessionStore } from "@/stores/sessionStore";
 
 type Props = object;
 
@@ -11,6 +15,10 @@ function Register_form({}: Props) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const router = useRouter();
+  const clearRdr = useRdrStore((s) => s.clearRdr);
+  const clearCre = useCreStore((s) => s.clearCre);
+  const setDev = useDevStore((s) => s.setDev);
+  const loginAs = useSessionStore((s) => s.loginAs);
 
   const handleLogin = async () => {
     try {
@@ -27,6 +35,21 @@ function Register_form({}: Props) {
         setSuccess("Login feito com sucesso!");
         setError("");
         console.log("Dados recebidos:", data);
+        // Garantir login único
+        clearRdr();
+        clearCre();
+        setDev({
+          id: data.developer.dev_id,
+          name: data.developer.name,
+          email: data.developer.email,
+          image: data.developer.image,
+        });
+        loginAs("developer", {
+          id: data.developer.dev_id,
+          name: data.developer.name,
+          email: data.developer.email,
+          imageUrl: data.developer.image ?? null,
+        });
         router.push("/");
       } else {
         setError(data.message || "Erro ao fazer login");
@@ -39,7 +62,7 @@ function Register_form({}: Props) {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <h1 className="text-4xl fieldset-legend">Login</h1>
+      <h1 className="text-4xl fieldset-legend">Login Dev</h1>
       <fieldset className="bg-base-100 p-4 border border-base-300 rounded-box w-xs font-bold text-secondary fieldset">
         <label className="label">Email</label>
         <input

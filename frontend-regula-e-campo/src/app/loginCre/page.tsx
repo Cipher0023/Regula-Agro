@@ -1,5 +1,5 @@
 import React from "react";
-import LogRdr from "@/components/loginMenu/loginRdr";
+import LogCre from "@/components/loginMenu/loginCre";
 import Link from "next/link";
 
 type Props = object;
@@ -13,7 +13,7 @@ export default function page({}: Props) {
         className="rounded-full h-14 object-cover"
         loading="lazy"
       />
-      <LogRdr />
+      <LogCre />
       <div className="p-2">
         login criador
         <Link

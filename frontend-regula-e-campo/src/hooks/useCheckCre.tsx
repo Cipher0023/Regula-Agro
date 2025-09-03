@@ -1,23 +1,23 @@
 import { useEffect } from "react";
-import useUserStore, { User } from "@/stores/useCreStore";
+import useCreStore, { Cre } from "@/stores/useCreStore";
 
 /**
  * Hook que verifica se há usuário autenticado no Zustand.
  * Se não houver, faz uma requisição para o backend (/api/chkUsr),
  * atualiza o Zustand e exibe logs detalhados sobre o processo.
  */
-export function useCheckUser() {
-  const user = useUserStore((state) => state.user);
-  const setUser = useUserStore((state) => state.setUser);
-  const clearUser = useUserStore((state) => state.clearUser);
+export function useCheckCre() {
+  const cre = useCreStore((state) => state.cre);
+  const setCre = useCreStore((state) => state.setCre);
+  const clearCre = useCreStore((state) => state.clearCre);
 
   useEffect(() => {
-    console.log("[useCheckUser] Usuário atual no store:", user);
+    console.log("[useCheckCre] Usuário atual no store:", cre);
 
-    if (!user) {
-      const fetchUser = async () => {
+    if (!cre) {
+      const fetchCre = async () => {
         console.log(
-          "[useCheckUser] Tentando buscar usuário autenticado no backend..."
+          "[useCheckCre] Tentando buscar usuário autenticado no backend..."
         );
         try {
           const response = await fetch(
@@ -27,51 +27,52 @@ export function useCheckUser() {
               credentials: "include",
             }
           );
-          console.log("[useCheckUser] Status da resposta:", response.status);
+          console.log("[useCheckCre] Status da resposta:", response.status);
 
           if (response.ok) {
             const data = await response.json();
-            if (data && data.user) {
-              console.log("[useCheckUser] Recebido do backend:", data.user);
-              // Mapeando para a interface User do front-end
-              const mappedUser: User = {
-                id: data.user.user_id,
-                name: data.user.name,
-                email: data.user.email,
+            if (data && data.result) {
+              console.log("[useCheckCre] Recebido do backend:", data.result);
+              // Mapeando para a interface Cre do front-end
+              const mappedCre: Cre = {
+                id: data.result.creator_id,
+                name: data.result.name,
+                email: data.result.email,
+                image: data.result.image,
               };
               console.log(
-                "[useCheckUser] Usuário mapeado para o store:",
-                mappedUser
+                "[useCheckCre] Usuário mapeado para o store:",
+                mappedCre
               );
-              setUser(mappedUser);
+              setCre(mappedCre);
             } else {
               console.log(
-                "[useCheckUser] Nenhum usuário encontrado na resposta. Limpando store."
+                "[useCheckCre] Nenhum usuário encontrado na resposta. Limpando store."
               );
-              clearUser();
+              clearCre();
             }
           } else {
             console.log(
-              "[useCheckUser] Resposta não OK. Limpando usuário no store."
+              "[useCheckCre] Resposta não OK. Limpando usuário no store."
             );
-            clearUser();
+            clearCre();
           }
         } catch (err) {
-          console.error("[useCheckUser] Erro ao buscar usuário:", err);
-          clearUser();
+          console.error("[useCheckCre] Erro ao buscar usuário:", err);
+          clearCre();
         } finally {
           console.log(
-            "[useCheckUser] Usuário final no store:",
-            useUserStore.getState().user
+            "[useCheckCre] Usuário final no store:",
+            useCreStore.getState().cre
           );
         }
       };
 
-      fetchUser();
+      fetchCre();
     } else {
       console.log(
-        "[useCheckUser] Usuário já presente. Nenhuma ação necessária."
+        "[useCheckCre] Usuário já presente. Nenhuma ação necessária."
       );
     }
-  }, [user, setUser, clearUser]);
+  }, [cre, setCre, clearCre]);
 }

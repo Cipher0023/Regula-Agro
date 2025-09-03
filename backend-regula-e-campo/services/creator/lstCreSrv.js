@@ -1,6 +1,5 @@
 import prisma from "../../prisma/prismaClient.js";
 
-
 export const lstCre = async () => {
   try {
     const result = await prisma.creator.findMany();

@@ -2,21 +2,27 @@
 import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import useDevStore from "../../stores/useDevStore";
+import useCreStore from "../../stores/useCreStore";
+import useRdrStore from "@/stores/useRdrStore";
+import useDevStore from "@/stores/useDevStore";
+import { useSessionStore } from "@/stores/sessionStore";
 
 type Props = object;
 
-export default function LogMenuInterno({}: Props) {
+export default function LogCre({}: Props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const router = useRouter();
-  const setDev = useDevStore((state) => state.setDev);
+  const setCre = useCreStore((state) => state.setCre);
+  const clearRdr = useRdrStore((s) => s.clearRdr);
+  const clearDev = useDevStore((s) => s.clearDev);
+  const loginAs = useSessionStore((s) => s.loginAs);
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("https://localhost:3002/public/logDev", {
+      const response = await fetch("https://localhost:3002/public/logCre", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,13 +34,23 @@ export default function LogMenuInterno({}: Props) {
       const data = await response.json();
 
       if (response.ok) {
-        setSuccess("Login de dev feito com sucesso!");
+        setSuccess("Login de criador feito com sucesso!");
         setError("");
         console.log("Dados recebidos:", data);
-        setDev({
-          id: data.developer.dev_id,
-          name: data.developer.name,
-          email: data.developer.email,
+        // Garantir login único
+        clearRdr();
+        clearDev();
+        setCre({
+          id: data.creator.creator_id,
+          name: data.creator.name,
+          email: data.creator.email,
+          image: data.creator.image,
+        });
+        loginAs("creator", {
+          id: data.creator.creator_id,
+          name: data.creator.name,
+          email: data.creator.email,
+          imageUrl: data.creator.image ?? null,
         });
         router.push("/");
       } else {
@@ -50,7 +66,7 @@ export default function LogMenuInterno({}: Props) {
     <div className="flex flex-col justify-center items-center min-h-screen">
       <div className="bg-[#1B5E20] shadow-lg p-5 rounded-3xl w-full max-w-md font-semibold text-white">
         <div className="flex justify-center items-center mb-4">
-          <div className="text-2xl">Login interno</div>
+          <div className="text-2xl">Login Criador</div>
         </div>
         <div className="mb-2">Insira seu email</div>
         <input

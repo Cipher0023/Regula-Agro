@@ -1,10 +1,9 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { generateToken } from "../../controllers/tokengenerator/tokenGenerator.js";
 import prisma from "../../prisma/prismaClient.js";
 
-const JWT_SECRET = process.env.JWT_SECRET;
 
-export const logDev = async (email, password) => {
+export const logDev = async (email, password, type = "dev") => {
   console.log("📥 Requisição recebida no loginDev", { email, password });
 
   if (!email) {
@@ -26,9 +25,7 @@ export const logDev = async (email, password) => {
     throw new Error("Senha incorreta");
   }
 
-  const token = jwt.sign({ id: devSearch.dev_id }, JWT_SECRET, {
-    expiresIn: "7d",
-  });
+  const token = generateToken({ type, id: devSearch.dev_id, role: null }, { expiresIn: "7d" });
   console.log("🔐 Token gerado com sucesso para:", email);
 
   return {

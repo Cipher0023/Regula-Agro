@@ -1,5 +1,5 @@
 import React from "react";
-import LogMenuInterno from "@/components/loginMenu/logMenuInterno";
+import LogDev from "@/components/loginMenu/loginDev";
 
 type Props = object;
 
@@ -13,7 +13,7 @@ export default function page({}: Props) {
         className="h-14 object-cover"
         loading="lazy"
       />
-      <LogMenuInterno />
+      <LogDev />
     </div>
   );
 }

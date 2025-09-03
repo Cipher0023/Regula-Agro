@@ -1,23 +1,28 @@
 "use client";
 import React from "react";
-import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import useUserStore from "../../stores/useCreStore";
+import useRdrStore from "../../stores/useRdrStore";
+import useCreStore from "@/stores/useCreStore";
+import useDevStore from "@/stores/useDevStore";
+import { useSessionStore } from "@/stores/sessionStore";
 
 type Props = object;
 
-export default function LogMenu({}: Props) {
+export default function LogRdr({}: Props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const router = useRouter();
-  const setUser = useUserStore((state) => state.setUser);
+  const setRdr = useRdrStore((state) => state.setRdr);
+  const clearCre = useCreStore((s) => s.clearCre);
+  const clearDev = useDevStore((s) => s.clearDev);
+  const loginAs = useSessionStore((s) => s.loginAs);
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("https://localhost:3002/public/logDev", {
+      const response = await fetch("https://localhost:3002/public/logRdr", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,10 +37,20 @@ export default function LogMenu({}: Props) {
         setSuccess("Login feito com sucesso!");
         setError("");
         console.log("Dados recebidos:", data);
-        setUser({
-          id: data.developer.dev_id,
-          name: data.developer.name,
-          email: data.developer.email,
+        // Garantir login único: limpa outros stores e preenche sessão unificada
+        clearCre();
+        clearDev();
+        setRdr({
+          id: data.reader.reader_id,
+          name: data.reader.name,
+          email: data.reader.email,
+          image: data.reader.image,
+        });
+        loginAs("reader", {
+          id: data.reader.reader_id,
+          name: data.reader.name,
+          email: data.reader.email,
+          imageUrl: data.reader.image ?? null,
         });
         router.push("/");
       } else {
@@ -83,12 +98,6 @@ export default function LogMenu({}: Props) {
           <p className="bg-base-100 mt-2 text-green-500">{success}</p>
         )}
       </div>
-      <div className="mb-4 text-gray-900 text-lg"> não tem conta? </div>
-      <Link href="/cadastro" className="">
-        <div className="m-2 text-blue-500 hover:text-blue-950 transition-colors duration-200">
-          Crie sua conta Regula e Campo
-        </div>
-      </Link>
     </div>
   );
 }

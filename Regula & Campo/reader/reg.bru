@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: http://localhost:3001/private/regRdr
+  url: https://localhost:3002/public/regRdr
   body: json
   auth: bearer
 }
@@ -16,10 +16,9 @@ auth:bearer {
 
 body:json {
   { 
-    "name": "Kaio" ,
-    "email": "teste@gmail.com",
-    "password": "12345678"
-    
-  
+    "name": "leitor teste" ,
+    "email": "teste2@gmail.com",
+    "password": "senha123",
+    "image":""
   }
 }

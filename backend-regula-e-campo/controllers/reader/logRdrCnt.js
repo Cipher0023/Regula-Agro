@@ -1,7 +1,7 @@
-import { logDev } from "../../services/developer/logDevSrv.js";
+import { logRdr } from "../../services/reader/logRdrSrv.js";
 import { setTokenCookie } from "../tokengenerator/tokenGenerator.js";
 
-export const logDevCnt = async (req, res) => {
+export const logRdrCnt = async (req, res) => {
   const { email, password } = req.body;
   try {
     if (!email) {
@@ -12,7 +12,7 @@ export const logDevCnt = async (req, res) => {
       email: email,
       password: password,
     };
-    const result = await logDev(email, password, "dev");
+    const result = await logRdr(email, password, "reader");
 
     // Define cookie HttpOnly com o token
     const token = result?.token;

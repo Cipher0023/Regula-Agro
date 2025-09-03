@@ -107,7 +107,6 @@ model Creator{
   role Role @relation(fields: [role_id], references: [role_id])
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  creator_image String @db.ObjectId
   image String?
   photos Photos[]
   created_news News[]
@@ -117,6 +116,7 @@ model Creator{
 model News{
   news_id String @id @default (auto()) @map("_id") @db.ObjectId
   title String
+  subtitle String
   text String
   creator_id String @db.ObjectId
   creator Creator @relation(fields: [creator_id], references: [creator_id])

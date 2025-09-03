@@ -16,7 +16,8 @@ export const fndDevCnt = async (req, res) => {
       if (token) {
         try {
           const decoded = jwt.verify(token, JWT_SECRET);
-          dev_id = decoded?.id;
+          // Aceita 'sub' (novo) ou 'id' (legado) no payload
+          dev_id = decoded?.sub || decoded?.id || null;
         } catch (err) {
           return res.status(401).json({ message: "Token inválido" });
         }
