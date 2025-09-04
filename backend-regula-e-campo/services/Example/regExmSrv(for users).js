@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt"; // For password hashing
-import prisma from "../../prisma/primaClient.js";
+import prisma from "../../prisma/prismaClient.js";
 
 //service padrão da Cubic para registros de usuários
 

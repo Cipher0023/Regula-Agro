@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt"; // For password hashing
-import prisma from "../../prisma/primaClient.js";
+import prisma from "../../prisma/prismaClient.js";
 
 export const updCsm = async (example_id, updateData) => {
   try {

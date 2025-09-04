@@ -62,6 +62,7 @@ model Reader_breadecrumbs{
   breadcrumb_id String @id @default (auto()) @map("_id") @db.ObjectId
   reader_id String @db.ObjectId
   reader Reader @relation(fields: [reader_id], references: [reader_id])
+  adress String
   created_at DateTime @default(now())
 }
 

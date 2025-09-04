@@ -1,19 +1,13 @@
 import prisma from "../../prisma/prismaClient.js";
 
-export const updExm = async (example_id, updateData) => {
+export const updCom = async (comments_id, updateData) => {
   try {
     //não se esqueça de trocar os allowed fields de acordo com o schema.
     const allowedFields = [
-      "key",
-      "data1",
-      "data2",
-      "data3",
-      "data4",
-      "dataInt",
-      "dataFloat",
-      "dataBoolean",
-      "dataDate",
-      "dataLink",
+      "reader_id",
+      "news_id",
+      "text",
+      
     ];
     const updateFields = {};
     //conversor de boolean
@@ -58,12 +52,12 @@ export const updExm = async (example_id, updateData) => {
       }
     }
     // verifica se pelo menos um dado vai ser atualizado
-    if (Object.keys(updateFields).length === 0) {
+    if (Object.reader_ids(updateFields).length === 0) {
       throw new Error("Nenhum dado para atualizar");
     }
     // realiza o update tendo como base no updateFields
-    const update = await prisma.example.update({
-      where: { example_id },
+    const update = await prisma.comments.update({
+      where: { comments_id },
       data: updateFields,
     });
     return {

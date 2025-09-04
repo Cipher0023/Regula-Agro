@@ -1,11 +1,11 @@
 meta {
-  name: regLikes
+  name: upd
   type: http
-  seq: 1
+  seq: 4
 }
 
-post {
-  url: http://localhost:3001/private/regLikes
+put {
+  url: http://localhost:3001/private/updLik
   body: json
   auth: bearer
 }
@@ -15,9 +15,10 @@ auth:bearer {
 }
 
 body:json {
-  { 
-    "reader_id": "teste", 
-    "news_id": "teste" 
-  
+  {
+    "news_id": "685caa05cbca4ca41182ba0e",
+    "updateData": {
+      "title": "Nova teste"
+    }
   }
 }

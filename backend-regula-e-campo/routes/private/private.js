@@ -54,6 +54,27 @@ import { lstRdrCnt } from "../../controllers/reader/lstRdrCnt.js";
 import { updRdrCnt } from "../../controllers/reader/updRdrCnt.js";
 import { delRdrCnt } from "../../controllers/reader/delRdrCnt.js";
 
+//import Com
+import { regComCnt } from "../../controllers/comments/regComCnt.js";
+import { fndComCnt } from "../../controllers/comments/fndComCnt.js";
+import { lstComCnt } from "../../controllers/comments/lstComCnt.js";
+import { updComCnt } from "../../controllers/comments/updComCnt.js";
+import { delComCnt } from "../../controllers/comments/delComCnt.js";
+
+//import Lik
+import { regLikCnt } from "../../controllers/likes/regLikCnt.js";
+import { fndLikCnt } from "../../controllers/likes/fndLikCnt.js";
+import { lstLikCnt } from "../../controllers/likes/lstLikCnt.js";
+import { updLikCnt } from "../../controllers/likes/updLikCnt.js";
+import { delLikCnt } from "../../controllers/likes/delLikCnt.js";
+
+//import Rbr
+import { regRbrCnt } from "../../controllers/breadcrumbs/regRbrCnt.js";
+import { fndRbrCnt } from "../../controllers/breadcrumbs/fndRbrCnt.js";
+import { lstRbrCnt } from "../../controllers/breadcrumbs/lstRbrCnt.js";
+import { updRbrCnt } from "../../controllers/breadcrumbs/updRbrCnt.js";
+import { delRbrCnt } from "../../controllers/breadcrumbs/delRbrCnt.js";
+
 const router = express.Router();
 
 //developer actions
@@ -109,5 +130,26 @@ router.get("/fndRdr", fndRdrCnt);
 router.get("/lstRdr", lstRdrCnt);
 router.put("/updRdr", updRdrCnt);
 router.delete("/delRdr", delRdrCnt);
+
+//Com actions
+router.post("/regCom", regComCnt);
+router.get("/fndCom", fndComCnt);
+router.get("/lstCom", lstComCnt);
+router.put("/updCom", updComCnt);
+router.delete("/delCom", delComCnt);
+
+//Lik actions
+router.post("/regLik", regLikCnt);
+router.get("/fndLik", fndLikCnt);
+router.get("/lstLik", lstLikCnt);
+router.put("/updLik", updLikCnt);
+router.delete("/delLik", delLikCnt);
+
+//Rbr actions
+router.post("/regRbr", regRbrCnt);
+router.get("/fndRbr", fndRbrCnt);
+router.get("/lstRbr", lstRbrCnt);
+router.put("/updRbr", updRbrCnt);
+router.delete("/delRbr", delRbrCnt);
 
 export default router;

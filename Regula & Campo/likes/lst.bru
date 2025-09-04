@@ -1,24 +1,15 @@
 meta {
-  name: reg
+  name: lst
   type: http
-  seq: 1
+  seq: 3
 }
 
-post {
-  url: http://localhost:3001/private/regCom
-  body: json
+get {
+  url: http://localhost:3001/private/lstLik
+  body: none
   auth: bearer
 }
 
 auth:bearer {
   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGQyOTU2M2YxZTA1M2I2NzUzNDE4NyIsImlhdCI6MTc1NDk0NjcxNywiZXhwIjoxNzU1NTUxNTE3fQ.Nb2DOSFpc9aaZTfFNO1kpL1wg497aGfIDF615WWPCAQ
-}
-
-body:json {
-  { 
-    "reader_id": "68b7314b7d9eb854b93ca638",
-    "news_id": "685caa05cbca4ca41182ba0e",
-    "text": "teste" 
-  
-  }
 }
