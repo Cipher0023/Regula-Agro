@@ -3,12 +3,13 @@ import React, { ReactNode, useEffect } from "react";
 import { useCheckCre } from "@/hooks/useCheckCre";
 import useNwsStore from "@/stores/useNwsStore";
 import { useCheckDev } from "@/hooks/useCheckDev";
+import { useCheckRdr } from "@/hooks/useCheckRdr";
 
 export function AppHydrator({ children }: { children: ReactNode }) {
   // User hydration
   useCheckCre();
   useCheckDev();
-  useCheckDev();
+  useCheckRdr();
 
   // Other domain hydrations
   const fetchNews = useNwsStore((s) => s.fetchNews);

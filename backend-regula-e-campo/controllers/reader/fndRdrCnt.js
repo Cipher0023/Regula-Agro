@@ -9,10 +9,8 @@ export const fndRdrCnt = async (req, res) => {
 
     // Se reader_id não vier na query, tenta extrair do token (cookie ou header)
     if (!reader_id) {
-      const bearer = req.headers?.authorization;
       const cookieToken = req.cookies?.token;
-      const token = cookieToken || (bearer ? bearer.replace("Bearer ", "") : null);
-
+      const token = cookieToken;
       if (token) {
         try {
           const decoded = jwt.verify(token, JWT_SECRET);
