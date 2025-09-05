@@ -57,7 +57,7 @@ const useNwsStore = create<NewsState>((set, get) => ({
     if (get().loading) return;
     set({ loading: true, error: null });
     try {
-      const res = await fetch("http://localhost:3001/public/lstNws");
+      const res = await fetch("https://localhost:3002/public/lstNws");
       if (!res.ok) throw new Error(`Erro ao buscar notícias: ${res.status}`);
       const data: News[] = await res.json();
       set({ news: data, loading: false });
