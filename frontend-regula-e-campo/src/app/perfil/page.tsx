@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { Camera } from 'lucide-react'
+import React, { useEffect, useRef, useState } from 'react'
+import { Camera, ArrowLeft } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 interface UserData {
   name: string
@@ -10,11 +11,11 @@ interface UserData {
   avatar?: string
 }
 
-export default function UserForm() {
+export default function UserProfile() {
+  const router = useRouter()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
 
-  // Dados originais e os que estão sendo editados
   const [userData, setUserData] = useState<UserData>({
     name: '',
     email: '',
@@ -24,28 +25,27 @@ export default function UserForm() {
 
   const [originalData, setOriginalData] = useState<UserData | null>(null)
 
-  // Carregar dados simulados do back
   useEffect(() => {
     const fetchUser = async () => {
-      // Simule aqui o fetch real
       const fakeUser = {
         name: 'João da Silva',
         email: 'joao@email.com',
         password: '',
         avatar: ''
       }
-
       setUserData(fakeUser)
       setOriginalData(fakeUser)
     }
-
     fetchUser()
   }, [])
 
-  // Detectar se houve alguma alteração
   const hasChanges =
     JSON.stringify(userData) !== JSON.stringify(originalData) ||
     imagePreview !== null
+
+  const handleChange = (field: keyof UserData, value: string) => {
+    setUserData(prev => ({ ...prev, [field]: value }))
+  }
 
   const handleImageClick = () => {
     fileInputRef.current?.click()
@@ -55,44 +55,47 @@ export default function UserForm() {
     const file = e.target.files?.[0]
     if (file) {
       const reader = new FileReader()
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string)
-      }
+      reader.onloadend = () => setImagePreview(reader.result as string)
       reader.readAsDataURL(file)
     }
   }
 
-  const handleChange = (field: keyof UserData, value: string) => {
-    setUserData(prev => ({
-      ...prev,
-      [field]: value
-    }))
+  const handleSubmit = () => {
+    const payload = { ...userData, avatar: imagePreview || userData.avatar }
+    console.log('Salvando alterações:', payload)
+    setOriginalData(payload)
+    setImagePreview(null)
+    alert('Alterações salvas com sucesso!')
   }
 
-  const handleSubmit = async () => {
-    try {
-      const payload = {
-        ...userData,
-        avatar: imagePreview || userData.avatar
-      }
-
-      // Simule envio para o back-end
-      console.log('Enviando para o back-end:', payload)
-
-      // Após salvar, atualiza original
-      setOriginalData(payload)
-      setImagePreview(null)
-      alert('Alterações salvas com sucesso!')
-    } catch (error) {
-      console.error('Erro ao salvar', error)
-    }
+  const handleGoBack = () => {
+    router.push('/') // ou outra página
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
-      <div className="w-110 p-6 rounded-xl shadow border border-gray-200">
-        <a href="/" className="text-green-700 font-medium mb-4 inline-block">Voltar</a>
+    <div className="flex items-center justify-center min-h-screen bg-white px-4">
+      <div
+        className="w-[520px] flex flex-col items-center bg-white rounded-xl p-12"
+        style={{
+          boxShadow: `
+            0px 8px 24px -3.25px rgba(0,0,0,0.086),
+            0px 1.83px 5.5px -2.17px rgba(0,0,0,0.145),
+            0px 0.5px 1.5px -1px rgba(0,0,0,0.16)
+          `
+        }}
+      >
+        {/* Botão de voltar com seta */}
+        <div className="w-full flex justify-start mb-6">
+          <button
+            onClick={handleGoBack}
+            className="flex items-center text-[#1B5E20] hover:text-green-800 text-sm font-medium"
+          >
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            Voltar
+          </button>
+        </div>
 
+        {/* Avatar */}
         <div className="flex justify-center mb-10 relative">
           <div className="relative w-24 h-24">
             <img
@@ -116,34 +119,36 @@ export default function UserForm() {
           </div>
         </div>
 
-        <form className="space-y-6">
+        {/* Formulário com espaçamento reduzido */}
+        <form className="w-full space-y-4">
           <input
             type="text"
             placeholder="Nome"
             value={userData.name}
             onChange={e => handleChange('name', e.target.value)}
-            className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-700"
           />
           <input
             type="email"
             placeholder="E-mail"
             value={userData.email}
             onChange={e => handleChange('email', e.target.value)}
-            className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-700"
           />
           <input
             type="password"
             placeholder="Senha"
             value={userData.password}
             onChange={e => handleChange('password', e.target.value)}
-            className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-700"
           />
         </form>
 
+        {/* Botão de salvar */}
         {hasChanges && (
           <button
             onClick={handleSubmit}
-            className="mt-6 w-full bg-green-600 text-white py-2 rounded-xl hover:bg-green-700 transition"
+            className="mt-6 w-full bg-[#1B5E20] hover:bg-green-800 text-white py-2 rounded-xl transition"
           >
             Salvar alterações
           </button>

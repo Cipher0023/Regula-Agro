@@ -17,7 +17,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   // Rotas onde a navbar deve ser escondida
-  const hideNavbar = ["/login", "/perfil"].includes(pathname);
+  const hideNavbar = ["/login", "/perfil","/cadastro","/esqueceu-senha"].includes(pathname);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -33,7 +33,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       )}
 
       {/* Compensação de altura da TopNotificationBar + Navbar */}
-      <div className={`${!hideNavbar ? "pt-[96px]" : ""} pb-20 min-h-[100vh]`}>
+      <div className={`${!hideNavbar ? "pt-[160px]" : ""} pb-20 min-h-[100vh]`}>
         <div className="mx-auto w-full max-w-[1216px] px-4 md:px-10">
           {children}
         </div>
