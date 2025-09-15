@@ -30,6 +30,7 @@ export const regNwsCnt = async (req, res) => {
       main_image,
       secondary_photos
     );
+    console.log(newRegister);
     return res.status(201).json(newRegister);
   } catch (err) {
     console.error("erro ao registrar", err.message);
